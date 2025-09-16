@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Mercury</string>
+    <string name="lorem_ipsumis_simply_dummy_text_of_the_printing_and_typesetting_industry_lorem">Lorem Ipsumis simply dummy text of the printing and typesetting industry. Lorem</string>
+    <string name="mensagem">Mensagem</string>
+    <string name="foto_de_perfil">Foto de Perfil</string>
+    <string name="nome_de_contato">Nome de contato</string>
+    <string name="info_button">info_button</string>
+    <string name="type">Mensagem...</string>
+    <string name="texte_de_mensagem">texte de mensagem</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="profileimage">profileImage</string>
+    <string name="login">Login</string>
+    <string name="esqueceu_a_senha">Esqueceu a senha</string>
+    <string name="or_login_with">Or login with</string>
+    <string name="senha">Senha</string>
+    <string name="email">Email</string>
+    <string name="not_registered_yet">not Registered yet</string>
+    <string name="conversas">Conversas</string>
+    <string name="arquivados">Arquivados</string>
+    <string name="signup">signup</string>
+    <string name="earth_view_from_the_moon">Earth view from the moon</string>
+    <string name="permanecer_conectado">Permanecer conectado</string>
+    <string name="google_login_button">Google login button</string>
+    <string name="github_login_button">github login button</string>
+    <string name="timeskip">TImeSkip</string>
+    <string name="nome">Nome:</string>
+    <string name="timeskip2">TImeSkip</string>
+    <string name="logo">TImeSkip</string>
+    <string name="pesquisar2">Pesquisar...</string>
+</resources>

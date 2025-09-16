@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:layout_margin="02dp"
+    android:background="@drawable/bg_message"
+    android:orientation="horizontal"
+    android:stateListAnimator="@animator/scale_animation"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator">
+
+    <LinearLayout
+        android:id="@+id/message_glass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="04dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:breakStrategy="simple"
+            android:ellipsize="none"
+            android:maxWidth="280dp"
+            android:paddingStart="08dp"
+            android:paddingTop="02dp"
+            android:paddingEnd="08dp"
+            android:paddingBottom="02dp"
+            android:scrollHorizontally="false"
+            android:text="Mensagem"
+            android:textColor="@color/white"
+            android:textSize="16sp">
+            
+        </TextView>
+
+        <Space
+            android:layout_width="04dp"
+            android:layout_height="match_parent">
+
+        </Space>
+
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:fontFamily="@font/space_mono_regular"
+            android:paddingEnd="04dp"
+            android:text="19:23"
+            android:textColor="#99ffffff"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
+
+    </LinearLayout>
+
+</FrameLayout>

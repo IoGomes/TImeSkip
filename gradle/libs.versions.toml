@@ -1,0 +1,42 @@
+[versions]
+agp = "8.11.1"
+blurview = "version-2.0.6"
+glide = "5.0.0"
+gson = "2.13.1"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.7.0"
+appcompat = "1.7.1"
+leakcanaryAndroid = "2.14"
+lottie = "6.6.7"
+material = "1.12.0"
+recyclerview = "1.4.0"
+retrofit = "3.1.0"
+retrofitVersion = "2.11.0"
+benchmark = "1.2.4"
+runner = "1.7.0"
+benchmarkJunit4 = "1.2.4"
+
+[libraries]
+blurview = { module = "com.github.Dimezis:BlurView", version.ref = "blurview" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-v2110 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
+benchmark-junit4 = { group = "androidx.benchmark", name = "benchmark-junit4", version.ref = "benchmarkJunit4" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+benchmark = { id = "androidx.benchmark", version.ref = "benchmark" }
+

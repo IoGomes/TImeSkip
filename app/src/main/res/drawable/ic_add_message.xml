@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Grupo para aplicar o flip horizontal -->
+    <group
+        android:scaleX="-1"
+        android:pivotX="12"
+        android:pivotY="12">
+
+        <path
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="#000000"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M12,14V11 M12,11V8 M12,11H9 M12,11H15
+                M7.1236,18.7012 L5.5996,19.9203
+                C4.7674,20.5861 4.3511,20.9191 4.001,20.9195
+                C3.6964,20.9198 3.4085,20.7813 3.2185,20.5433
+                C3,20.2696 3,19.7369 3,18.6712V7.2002
+                C3,6.0801 3,5.5196 3.218,5.0918
+                C3.4097,4.7155 3.7155,4.4097 4.0918,4.218
+                C4.5196,4 5.0801,4 6.2002,4H17.8002
+                C18.9203,4 19.4801,4 19.9079,4.218
+                C20.2842,4.4097 20.5905,4.7155 20.7822,5.0918
+                C21,5.5192 21,6.079 21,7.1969V14.8036
+                C21,15.9215 21,16.4805 20.7822,16.9079
+                C20.5905,17.2842 20.2843,17.5905 19.908,17.7822
+                C19.4806,18 18.9215,18 17.8036,18H9.1226
+                C8.7065,18 8.4983,18 8.2993,18.0408
+                C8.1228,18.0771 7.9522,18.1368 7.7917,18.2188
+                C7.6115,18.3108 7.4496,18.4403 7.1272,18.6982Z"/>
+    </group>
+</vector>

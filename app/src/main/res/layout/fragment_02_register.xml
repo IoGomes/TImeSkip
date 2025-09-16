@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stateListAnimator="@animator/scale_animation2">
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/glass"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_auth_container"
+        android:clipToOutline="true"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/ic_return"></Button>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <EditText
+                android:id="@+id/user_name_textfield"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_search"
+                android:fontFamily="@font/space_mono_regular"
+                android:hint="@string/nome"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"
+                tools:ignore="Autofill,RtlSymmetry,TextFields" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="16dp" />
+
+            <EditText
+                android:id="@+id/user_email_textfield"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_search"
+                android:fontFamily="@font/space_mono_regular"
+                android:hint="Email:"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"
+                tools:ignore="Autofill,RtlSymmetry,TextFields" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <EditText
+                android:id="@+id/user_CPF_textfield"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_search"
+
+                android:fontFamily="@font/space_mono_regular"
+                android:hint="CPF:"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp"
+                tools:ignore="Autofill,RtlSymmetry,TextFields" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <EditText
+                android:id="@+id/registro_PR_textfield"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_search"
+
+                android:fontFamily="@font/space_mono_regular"
+                android:hint="Registro PR:"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"
+                tools:ignore="Autofill,RtlSymmetry,TextFields" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <EditText
+                android:id="@+id/user_password_textfield"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:background="@drawable/bg_search"
+
+                android:fontFamily="@font/space_mono_regular"
+                android:hint="@string/senha"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <EditText
+                android:id="@+id/confirm_user_password_textfield"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:background="@drawable/bg_search"
+
+                android:fontFamily="@font/space_mono_regular"
+                android:hint="Confirmar Senha:"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/termos_e_condições"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:checked="false"
+                    android:fontFamily="@font/space_mono_regular"
+                    android:gravity="start"
+                    android:textColor="@color/white"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_mono_regular"
+                    android:text="concordo com os temos e condições"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:checked="false"
+                    android:fontFamily="@font/space_mono_regular"
+                    android:gravity="start"
+                    android:textColor="@color/white"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_mono_regular"
+                    android:text="concordo com os termos de privacidade"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="42dp"
+                app:cardElevation="0dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:elevation="2dp">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottie_login_backg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/lottie_01_button_animated_gradient" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottie_loading_circle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/lottie_02_loading_circle" />
+
+                    <Button
+                        android:id="@+id/signup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/space_mono_regular"
+                        android:stateListAnimator="@animator/scale_animation"
+                        android:text="SignUp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="32sp"
+                        android:visibility="visible" />
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp">
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_auth_screen_separate_line">
+
+                </View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:fontFamily="@font/space_mono_regular"
+                    android:gravity="center_horizontal"
+                    android:text="or signup with"
+                    android:textColor="@color/white">
+
+                </TextView>
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_auth_screen_separate_line">
+
+                </View>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="08dp">
+
+            </Space>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/google_signup"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/ic_google_auth" />
+
+                <Space
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/github_signup"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_github_auth" />
+            </LinearLayout>
+        </LinearLayout>
+    </eightbitlab.com.blurview.BlurView>
+</FrameLayout>
