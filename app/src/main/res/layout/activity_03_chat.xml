@@ -121,9 +121,10 @@
 
         <eightbitlab.com.blurview.BlurView
             android:id="@+id/mensage_field"
-            android:layout_width="326dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:layout_margin="04dp"
             android:background="@drawable/bg_search"
             android:clipToOutline="true"
@@ -145,6 +146,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/sticker_icon"
                     android:src="@drawable/ic_sticker"
                     android:stateListAnimator="@animator/scale_animation"
                     app:layout_constraintStart_toStartOf="parent"
@@ -163,6 +165,7 @@
                     android:stateListAnimator="@animator/scale_animation"
                     android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:textColorHint="#99ffffff"
+                    android:textColor="@color/white"
                     app:layout_constraintStart_toEndOf="@id/sticker"
                     app:layout_constraintEnd_toStartOf="@id/clipButton"
                     app:layout_constraintTop_toTopOf="parent"
