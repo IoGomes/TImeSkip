@@ -5,7 +5,7 @@
     tools:ignore="ExtraText">
     <corners android:radius="22dp">
     </corners>
-    <solid android:color="#99202020">
+    <solid android:color="#99101010">
     </solid>
     <stroke
         android:width="0.5dp"
