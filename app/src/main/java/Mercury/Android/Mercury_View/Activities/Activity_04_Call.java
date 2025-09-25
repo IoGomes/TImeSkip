@@ -1,4 +1,4 @@
 package Mercury.Android.Mercury_View.Activities;
 
-public class Activity_04_Calling_Screen {
+public class Activity_04_Call {
 }

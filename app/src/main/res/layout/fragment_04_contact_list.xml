@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragmentContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false"
+        android:layout_height="0dp"
+        tools:listitem="@layout/rv_01_chat"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="false"
+        android:focusable="false"
+        />
+
+    <ImageButton
+        android:id="@+id/start_chat"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:background="@drawable/bg_send_button"
+        android:layout_marginEnd="08dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_add_chat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:stateListAnimator="@animator/scale_animation2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

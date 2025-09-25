@@ -1,29 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#101010"
-    tools:ignore="Typos">
+    android:background="@drawable/img_auth_screen"
+    tools:ignore="Typos"
+    android:padding="8dp">
+
+    <ImageButton
+        android:id="@+id/returnButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="08dp"
+        android:background="@drawable/bg_auth_container"
+        android:src="@drawable/ic_return"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/motionLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:stateListAnimator="@animator/scale_animation">
+
+    </ImageButton>
 
     <TextView
         android:id="@+id/not_registered_yet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/space_mono_regular"
-        android:text="@string/not_registered_yet"
+        android:text="Not registered yet?"
         android:textColor="#808080"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/text3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/signup"
-        android:layout_width="50dp"
-        android:layout_height="20dp"
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:clickable="true"
+        android:paddingStart="04dp"
         android:focusable="true"
         android:fontFamily="@font/space_mono_regular"
         android:gravity="center"
@@ -31,17 +49,18 @@
         android:textAllCaps="false"
         android:textColor="#808080"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/not_registered_yet"
-        app:layout_constraintStart_toEndOf="@+id/not_registered_yet" />
+        app:layout_constraintStart_toEndOf="@+id/not_registered_yet"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <LinearLayout
         android:id="@+id/motionLayout"
         android:layout_width="match_parent"
-        android:layout_height="700dp"
-        android:layout_gravity="bottom"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginBottom="18dp"
+        android:layout_height="650dp"
+        android:gravity="bottom"
+        android:layout_marginBottom="12dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/not_registered_yet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

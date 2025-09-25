@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.text.TextWatcher;
 import android.text.Editable;
@@ -20,7 +22,8 @@ import java.util.List;
 import java.util.Locale;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
-import Mercury.Android.Mercury_View.Activities.Activity_03_Msg_Screen;
+import Mercury.Android.Mercury_View.Activities.Activity_03_Chat;
+import Mercury.Android.Mercury_View.Dialogs.Dialog_03_ProfileImage;
 import Mercury.Android.R;
 
 public class RView_01_ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -29,7 +32,8 @@ public class RView_01_ChatAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
 
     private static final int VIEW_TYPE_HEADER = 0;
-    private static final int VIEW_TYPE_ITEM   = 1;
+    private static final int VIEW_TYPE_CATEGORY = 1;
+    private static final int VIEW_TYPE_ITEM = 2;
 
     private AdapterView.OnItemClickListener clickListener;
 
@@ -40,19 +44,26 @@ public class RView_01_ChatAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemViewType(int position) {
-        return (position == 0) ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
+        if (position == 0) {
+            return VIEW_TYPE_HEADER;
+        } else if (position == 1) {
+            return VIEW_TYPE_CATEGORY;
+        } else {
+            return VIEW_TYPE_ITEM;
+        }
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_HEADER) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rv_05_search_layout, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_05_search_layout, parent, false);
             return new HeaderViewHolder(view);
+        } else if (viewType == VIEW_TYPE_CATEGORY) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_header_category, parent, false);
+            return new SecondViewHolder(view);
         } else {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rv_01_chat, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_01_chat, parent, false);
             return new MessageViewHolder(view);
         }
     }
@@ -62,20 +73,31 @@ public class RView_01_ChatAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof HeaderViewHolder) {
             HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
             setupSearchEditText(headerHolder.searchEditText);
+        } else if (holder instanceof SecondViewHolder) {
+            SecondViewHolder categoryHolder = (SecondViewHolder) holder;
         } else if (holder instanceof MessageViewHolder) {
             MessageViewHolder messageHolder = (MessageViewHolder) holder;
-            int chatPosition = position - 1;
+            int chatPosition = position - 2; // -2 porque agora temos dois headers
 
             if (chatPosition >= 0 && chatPosition < filteredChats.size()) {
                 Entity_02_Chat_Session chatSession = filteredChats.get(chatPosition);
                 bindChatData(messageHolder, chatSession);
             }
+
+            // Configurar click listener para o profileImage
+            messageHolder.profileImage.setOnClickListener(v -> {
+                Dialog_03_ProfileImage dialog = new Dialog_03_ProfileImage(v.getContext());
+                dialog.show();
+            });
         }
 
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), Activity_03_Msg_Screen.class);
-            v.getContext().startActivity(intent);
-        });
+        // Configurar click listener apenas para itens de chat (itemView completo)
+        if (holder instanceof MessageViewHolder) {
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), Activity_03_Chat.class);
+                v.getContext().startActivity(intent);
+            });
+        }
     }
 
     private void bindChatData(MessageViewHolder holder, Entity_02_Chat_Session chatSession) {
@@ -133,17 +155,19 @@ public class RView_01_ChatAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        // +1 for header
-        return filteredChats.size() + 1;
+        // +2 for header and category header
+        return filteredChats.size() + 2;
     }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView lastText, textDate;
+        ImageButton profileImage;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
             lastText = itemView.findViewById(R.id.lastText);
             textDate = itemView.findViewById(R.id.textDate);
+            profileImage = itemView.findViewById(R.id.imageButton);
         }
     }
 
@@ -157,6 +181,15 @@ public class RView_01_ChatAdapter extends RecyclerView.Adapter<RecyclerView.View
             if (searchEditText == null) {
                 android.util.Log.e("ChatAdapter", "EditText with ID 'searchGlass' not found in search_layout");
             }
+        }
+    }
+
+    static class SecondViewHolder extends RecyclerView.ViewHolder {
+        Button textView;
+
+        public SecondViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textView = itemView.findViewById(R.id.category);
         }
     }
 }

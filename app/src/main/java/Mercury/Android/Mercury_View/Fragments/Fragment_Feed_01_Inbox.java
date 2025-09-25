@@ -18,24 +18,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import androidx.annotation.LayoutRes;
-import android.content.Context;
-import androidx.fragment.app.FragmentActivity;
 
-import Mercury.Android.Mercury_View.Activities.Activity_02_Main_Screen;
-import Mercury.Android.Mercury_View.Activities.Activity_03_Msg_Screen;
+import Mercury.Android.Mercury_View.Activities.Activity_03_Chat;
 import Mercury.Android.Mercury_View.RecyclerView.RView_01_ChatAdapter;
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
 import Mercury.Android.R;
 
-public class Fragment_03_AllChats extends Fragment {
+public class Fragment_Feed_01_Inbox extends Fragment {
 
     ImageButton button;
     private RecyclerView recyclerView;
     private RView_01_ChatAdapter adapter;
     private List<Entity_02_Chat_Session> chatSessions;
 
-    public Fragment_03_AllChats() {
+    public Fragment_Feed_01_Inbox() {
         super();
     }
 
@@ -44,18 +40,13 @@ public class Fragment_03_AllChats extends Fragment {
     @SuppressWarnings("SpellCheckingInspection")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
-
-        // inflar o layout do fragment
         View view = inflater.inflate(R.layout.fragment_03_chats, container, false);
 
-        // inicializar lista de dados
         chatSessions = new ArrayList<>();
 
         List<String> users2 = Arrays.asList("userC", "userD");
         List<Date> dates2 = Arrays.asList(new Date());
 
-        // (opcional) adicionar dados de teste
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
@@ -117,6 +108,43 @@ public class Fragment_03_AllChats extends Fragment {
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                users2,
+                dates2,
+                "Reunião marcada para amanhã."
+        ));
+        chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                users2,
+                dates2,
+                "Reunião marcada para amanhã."
+        ));
+        chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                users2,
+                dates2,
+                "Reunião marcada para amanhã."
+        ));chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                users2,
+                dates2,
+                "Reunião marcada para amanhã."
+        ));chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                users2,
+                dates2,
+                "Reunião marcada para amanhã."
+        ));chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                users2,
+                dates2,
+                "Reunião marcada para amanhã."
+        ));chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                users2,
+                dates2,
+                "Reunião marcada para amanhã."
+        ));chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
                 dates2,
@@ -130,7 +158,7 @@ public class Fragment_03_AllChats extends Fragment {
 
         recyclerView.setOnClickListener(v -> {
             Log.d("RecyclerClick", "RecyclerView container clicado");
-            Intent intent = new Intent(getActivity(), Activity_03_Msg_Screen.class);
+            Intent intent = new Intent(getActivity(), Activity_03_Chat.class);
             startActivity(intent);
 
         });
@@ -140,12 +168,11 @@ public class Fragment_03_AllChats extends Fragment {
 
         button = view.findViewById(R.id.start_chat);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), Activity_03_Msg_Screen.class);
+            Intent intent = new Intent(getActivity(), Activity_03_Chat.class);
             startActivity(intent);
         });
 
         return view;
-
 
     }
 }

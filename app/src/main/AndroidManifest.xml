@@ -21,12 +21,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
-        android:theme="@style/Theme.Mercury">
+        android:theme="@style/Theme.AppCompat">
 
         <activity
-            android:name="Mercury.Android.Mercury_View.Activities.Activity_01_auth"
+            android:name="Mercury.Android.Mercury_View.Activities.Activity_01_Auth"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+            android:theme="@style/Theme.AppCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,13 +34,13 @@
         </activity>
 
         <activity
-            android:name="Mercury.Android.Mercury_View.Activities.Activity_02_Main_Screen"
+            android:name="Mercury.Android.Mercury_View.Activities.Activity_02_Feed"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize|stateHidden">
+            android:theme="@style/Theme.AppCompat">
         </activity>
 
         <activity
-            android:name="Mercury.Android.Mercury_View.Activities.Activity_03_Msg_Screen"
+            android:name="Mercury.Android.Mercury_View.Activities.Activity_03_Chat"
             android:exported="true"
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>

@@ -1,195 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stateListAnimator="@animator/scale_animation2">
+    android:background="@drawable/bg_auth_container"
+    android:padding="12dp">
 
-    <eightbitlab.com.blurview.BlurView
-        android:id="@+id/glass"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="642dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shape_auth_container"
-        android:clipToOutline="true"
-        android:padding="12dp"
-        tools:ignore="UnusedAttribute">
+        android:layout_height="30dp"
+        android:fontFamily="@font/space_mono_regular"
+        android:gravity="center"
+        android:text="One Galaxy, Multiple Conections"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <LinearLayout
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:fontFamily="@font/space_armor"
+        android:gravity="center"
+        android:text="Nebula"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/email_textfield"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <EditText
+        android:id="@+id/email_textfield"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginVertical="16dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_edit_textfield"
+        android:drawableEnd="@drawable/ic_email"
+        android:fontFamily="@font/space_mono_regular"
+        android:hint="@string/email"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColorHint="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/user_password_textfield" />
+
+
+    <EditText
+        android:id="@+id/user_password_textfield"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginVertical="16dp"
+        android:background="@drawable/bg_edit_textfield"
+        android:drawableRight="@drawable/ic_password"
+        android:fontFamily="@font/space_mono_regular"
+        android:hint="@string/senha"
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColorHint="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/confirm" />
+
+    <LinearLayout
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/checkBoxExample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/space_mono_regular" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/space_mono_regular"
+            android:text="Remain Conected"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <Space
+            android:layout_width="18dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/space_mono_regular"
+            android:text="@string/esqueceu_a_senha"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginVertical="08dp"
+        android:background="@android:color/transparent"
+        app:cardCornerRadius="28dp"
+        app:layout_constraintBottom_toTopOf="@id/orLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:orientation="vertical">
+            android:background="@drawable/bg_login_button"
+            android:fontFamily="@font/space_mono_regular"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/orLogin" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/space_armor"
-                android:gravity="center"
-                android:text="Nebula"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_loading_circle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:elevation="10dp"
+            android:visibility="gone"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_02_loading" />
 
-            <EditText
-                android:id="@+id/email_textfield"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_search"
-                android:fontFamily="@font/space_mono_regular"
-                android:hint="@string/email"
-                android:paddingStart="16dp"
+    </androidx.cardview.widget.CardView>
 
-                android:paddingEnd="16dp"
-                android:stateListAnimator="@animator/scale_animation2"
-                android:textColorHint="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:ignore="Autofill,TextFields" />
+    <TextView
+        android:id="@+id/orLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginVertical="08dp"
+        android:fontFamily="@font/space_mono_regular"
+        android:text="@string/or_login_with"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="16dp" />
+    <LinearLayout
+        android:id="@+id/google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-            <EditText
-                android:id="@+id/password_textfield"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+        <ImageButton
+            android:id="@+id/googleLogin"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/ic_google_auth"
+            android:contentDescription="@string/google_login_button" />
 
-                android:background="@drawable/bg_search"
-                android:fontFamily="@font/space_mono_regular"
-                android:hint="@string/senha"
-                android:inputType="textPassword"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textColorHint="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:ignore="Autofill,RtlSymmetry" />
+        <ImageButton
+            android:id="@+id/other_button"
+            android:layout_width="40dp"
+            android:layout_gravity="center"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_github_auth"
+            />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="12dp" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Switch
-                    android:id="@+id/checkBoxExample"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/space_mono_regular"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/space_mono_regular"
-                    android:text="@string/permanecer_conectado"
-                    android:textColor="@color/white" />
-
-                <Space
-                    android:layout_width="24dp"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/space_mono_regular"
-                    android:text="@string/esqueceu_a_senha"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="12dp" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:elevation="2dp">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottie_loading_circle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="invisible"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/lottie_02_loading_circle" />
-
-                <Button
-                    android:id="@+id/login_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#9C27B0"
-                    android:fontFamily="@font/space_mono_regular"
-                    android:text="@string/login"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="23sp"
-                    android:visibility="visible" />
-
-            </FrameLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="12dp">
-
-                <View
-                    android:layout_width="102dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_auth_screen_separate_line" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="22dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="6dp"
-                    android:fontFamily="@font/space_mono_regular"
-                    android:gravity="center_horizontal"
-                    android:text="@string/or_login_with"
-                    android:textColor="@color/white" />
-
-                <View
-                    android:layout_width="102dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_auth_screen_separate_line" />
-            </LinearLayout>
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="08dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <ImageButton
-                    android:id="@+id/google"
-                    android:layout_width="180dp"
-                    android:layout_height="44dp"
-                    android:background="@drawable/android_dark_rd"
-                    android:contentDescription="@string/google_login_button" />
-
-                <Space
-                    android:layout_width="36dp"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </eightbitlab.com.blurview.BlurView>
-</FrameLayout>

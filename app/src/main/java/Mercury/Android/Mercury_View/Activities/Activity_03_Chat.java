@@ -36,13 +36,12 @@ import Mercury.Android.R;
 import eightbitlab.com.blurview.BlurView;
 
 @SuppressWarnings("SpellCheckingInspection")
-public class Activity_03_Msg_Screen extends AppCompatActivity {
+public class Activity_03_Chat extends AppCompatActivity {
 
     private BlurView blurView;
 
-    private BlurView blurView2;
 
-    private LinearLayout bottomBar;
+    private ConstraintLayout bottomBar;
 
     private RView_02_MsgAdapter adapter;
 
@@ -68,6 +67,9 @@ public class Activity_03_Msg_Screen extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+        View rootLayout = findViewById(R.id.chat);
+        int navigationBarHeight = getNavigationBarHeight();
 
         bottomBar = findViewById(R.id.bottom_bar);
         setupKeyboardListener();
@@ -117,24 +119,20 @@ public class Activity_03_Msg_Screen extends AppCompatActivity {
             }
         });
 
-
         Window window = getWindow();
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        window.setStatusBarColor(Color.TRANSPARENT);
+        window.setNavigationBarColor(Color.parseColor("#99202020"));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
         blurView = findViewById(R.id.blurview);
-        blurView2 = findViewById(R.id.mensage_field);
 
 
         ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
         Drawable windowBackground = decorView.getBackground();
 
         blurView.setupWith(decorView).setFrameClearDrawable(windowBackground).setBlurRadius(12f);
-        blurView2.setupWith(decorView).setFrameClearDrawable(windowBackground).setBlurRadius(12f);
 
         ImageButton popupMenu = findViewById(R.id.menu);
 
@@ -154,7 +152,7 @@ public class Activity_03_Msg_Screen extends AppCompatActivity {
                 Method setBackgroundDrawable = menuPopupHelper.getClass()
                         .getDeclaredMethod("setBackgroundDrawable", Drawable.class);
                 setBackgroundDrawable.invoke(menuPopupHelper,
-                        ContextCompat.getDrawable(this, R.drawable.pop_bg));
+                        ContextCompat.getDrawable(this, R.drawable.bg_popup_menu));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -180,7 +178,7 @@ public class Activity_03_Msg_Screen extends AppCompatActivity {
                 Method setBackgroundDrawable = menuPopupHelper.getClass()
                         .getDeclaredMethod("setBackgroundDrawable", Drawable.class);
                 setBackgroundDrawable.invoke(menuPopupHelper,
-                        ContextCompat.getDrawable(this, R.drawable.pop_bg));
+                        ContextCompat.getDrawable(this, R.drawable.bg_popup_menu));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -218,12 +216,20 @@ public class Activity_03_Msg_Screen extends AppCompatActivity {
                 if (keypadHeight > screenHeight * 0.15) {
                     layoutParams.bottomMargin = keypadHeight;
                 } else {
-                    layoutParams.bottomMargin = dpToPx(4);
+                    layoutParams.bottomMargin = dpToPx(0);
                 }
 
                 bottomBar.setLayoutParams(layoutParams);
             }
         });
+    }
+
+    private int getNavigationBarHeight() {
+        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return getResources().getDimensionPixelSize(resourceId);
+        }
+        return 0;
     }
 
     private int dpToPx(int dp) {

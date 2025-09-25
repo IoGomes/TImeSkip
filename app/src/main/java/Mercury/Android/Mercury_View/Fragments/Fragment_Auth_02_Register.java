@@ -1,15 +1,19 @@
 package Mercury.Android.Mercury_View.Fragments;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +23,6 @@ import androidx.fragment.app.Fragment;
 import com.airbnb.lottie.LottieAnimationView;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_01_User;
-import Mercury.Android.Mercury_Model.Services.AlertDialog;
 import Mercury.Android.Mercury_View.Activities.Activity_02_Feed;
 import Mercury.Android.Mercury_View.Dialogs.Dialog_01_Login_Credentials;
 import Mercury.Android.R;
@@ -27,7 +30,13 @@ import Mercury.Android.R;
 /// @author Ítalo Oliveira Gomes
 
 @SuppressWarnings("SpellCheckingInspection")
-public class Fragment_02_Register extends Fragment {
+public class Fragment_Auth_02_Register extends Fragment {
+
+    // Variáveis globais para LifeCycle
+    Button signupButton;
+    TextView termsAndConditions;
+    TextView privacyPolicy;
+    LottieAnimationView loadAnimation;
 
     @Nullable
     @Override
@@ -38,8 +47,7 @@ public class Fragment_02_Register extends Fragment {
         ViewGroup rootView = (ViewGroup) requireActivity().getWindow().getDecorView().findViewById(android.R.id.content);
 
         //Buttons
-        Button returnButton = view.findViewById(R.id.return_button);
-        Button signupButton = view.findViewById(R.id.signup_button);
+        signupButton = view.findViewById(R.id.signup_button);
 
         //EditTextField
         EditText userNameTextfield = view.findViewById(R.id.user_name_textfield);
@@ -52,13 +60,19 @@ public class Fragment_02_Register extends Fragment {
         SwitchCompat termosCondicoes = view.findViewById(R.id.termos_e_condicoes);
         SwitchCompat termosPrivacidade = view.findViewById(R.id.termos_e_privacidade);
 
+        //TextViews
+        termsAndConditions = view.findViewById(R.id.terms_and_conditions);
+        privacyPolicy = view.findViewById(R.id.privacy_policy);
+
         //LottieAnimations
-        LottieAnimationView loadingAnimation = view.findViewById(R.id.lottie_loading_circle);
-        LottieAnimationView registerConcluded  = view.findViewById(R.id.lottieAnimation2);
+        loadAnimation = view.findViewById(R.id.lottie_loading);
 
-        returnButton.setOnClickListener(v->{
+        //Sublinhando Textviews
+        String htmlTermsAndConditions = "I agree with the <u><font color='#E68AD8'>Terms and Conditions</font></u>";
+        String htmlPrivacyPolicy = "I agree with the <u><font color='#E68AD8'>Privacy Policy</font></u>";
 
-        });
+        termsAndConditions.setText(Html.fromHtml(htmlTermsAndConditions, Html.FROM_HTML_MODE_LEGACY));
+        privacyPolicy.setText(Html.fromHtml(htmlPrivacyPolicy, Html.FROM_HTML_MODE_LEGACY));
 
         signupButton.setOnClickListener(v -> {
 
@@ -82,22 +96,42 @@ public class Fragment_02_Register extends Fragment {
 
             if (newRegistry.isUserEnabled()) {
 
-                loadingAnimation.playAnimation();
-                loadingAnimation.setVisibility(VISIBLE);
+                signupButton.setText("");
 
-                registerConcluded.playAnimation();
-                registerConcluded.setVisibility(VISIBLE);
+                loadAnimation.playAnimation();
+                loadAnimation.setVisibility(VISIBLE);
 
-                Intent intent = new Intent(getActivity(), Activity_02_Feed.class);
-                startActivity(intent);
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    Intent intent = new Intent(getActivity(), Activity_02_Feed.class);
+                    startActivity(intent);
+                }, 1500);
 
-            }
-            else {
+            } else {
                 Dialog_01_Login_Credentials dialog = new Dialog_01_Login_Credentials(requireContext());
                 dialog.show();
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        signupButton.setText("SignUp");
+        loadAnimation.cancelAnimation();
+        loadAnimation.setVisibility(GONE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        signupButton = null;
     }
 }

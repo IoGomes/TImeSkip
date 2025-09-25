@@ -12,8 +12,8 @@
     <string name="login">Login</string>
     <string name="esqueceu_a_senha">Esqueceu a senha</string>
     <string name="or_login_with">Or login with</string>
-    <string name="senha">Senha</string>
-    <string name="email">Email</string>
+    <string name="senha">Senha:</string>
+    <string name="email">Email:</string>
     <string name="not_registered_yet">not Registered yet</string>
     <string name="conversas">Conversas</string>
     <string name="arquivados">Arquivados</string>
@@ -27,4 +27,6 @@
     <string name="timeskip2">TImeSkip</string>
     <string name="logo">TImeSkip</string>
     <string name="pesquisar2">Pesquisar...</string>
+    <string name="sticker_icon">Sticker Icon</string>
+    <string name="texto_multicolor_html"><![CDATA[<font color="#FF0000">Texto vermelho</font> e <font color="#0000FF">texto azul</font>]]></string>
 </resources>

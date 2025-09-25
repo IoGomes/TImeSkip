@@ -2,7 +2,7 @@
 <resources>
 
     <style name="RoundedPopupMenu" parent="Widget.AppCompat.PopupMenu">
-        <item name="popupMenuBackground">@drawable/pop_bg</item>
+        <item name="popupMenuBackground">@drawable/bg_popup_menu</item>
         <item name="android:dropDownVerticalOffset">20dp</item>
         <item name="android:dropDownHorizontalOffset">0dp</item>
     </style>

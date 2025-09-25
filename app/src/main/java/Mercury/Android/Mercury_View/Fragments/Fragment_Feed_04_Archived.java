@@ -21,7 +21,7 @@ import Mercury.Android.Mercury_View.RecyclerView.RView_01_ChatAdapter;
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
 import Mercury.Android.R;
 
-public class Fragment_06_Archived extends Fragment {
+public class Fragment_Feed_04_Archived extends Fragment {
 
     private RecyclerView recyclerView;
     private RView_01_ChatAdapter adapter;

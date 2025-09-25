@@ -4,9 +4,7 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
 
-    <!-- Grupo para aplicar o flip horizontal -->
     <group
-        android:scaleX="-1"
         android:pivotX="12"
         android:pivotY="12">
 
