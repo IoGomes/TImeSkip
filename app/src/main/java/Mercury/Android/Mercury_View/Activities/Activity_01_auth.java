@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_01_Login;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_02_Register;
-import Mercury.Android.Mercury_View.View_Observer;
+import Mercury.Android.Mercury_View.View.View_Observer;
 import Mercury.Android.R;
 import Mercury.Android.databinding.Activity01AuthBinding;
 

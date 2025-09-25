@@ -20,7 +20,7 @@ import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_01_Inbox;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_03_Calls;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_02_Contacts;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_04_Archived;
-import Mercury.Android.Mercury_View.View_Observer;
+import Mercury.Android.Mercury_View.View.View_Observer;
 import Mercury.Android.R;
 
 /// @author Ítalo Oliveira Gomes
