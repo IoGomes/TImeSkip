@@ -23,7 +23,7 @@ import java.util.Locale;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
 import Mercury.Android.Mercury_View.Activities.Activity_03_Chat;
-import Mercury.Android.Mercury_View.Dialogs.Dialog_03_ProfileImage;
+import Mercury.Android.Mercury_View.Dialogs.Dialog_Feed_01_Profile_Image;
 import Mercury.Android.R;
 
 public class RV_Feed_01_Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -86,7 +86,7 @@ public class RV_Feed_01_Chat_Adapter extends RecyclerView.Adapter<RecyclerView.V
 
             // Configurar click listener para o profileImage
             messageHolder.profileImage.setOnClickListener(v -> {
-                Dialog_03_ProfileImage dialog = new Dialog_03_ProfileImage(v.getContext());
+                Dialog_Feed_01_Profile_Image dialog = new Dialog_Feed_01_Profile_Image(v.getContext());
                 dialog.show();
             });
         }

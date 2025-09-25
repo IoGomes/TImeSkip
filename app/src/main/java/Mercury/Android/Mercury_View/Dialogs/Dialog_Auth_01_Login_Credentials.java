@@ -16,9 +16,9 @@ import java.util.List;
 import Mercury.Android.Mercury_Model.Services.AlertDialog;
 import Mercury.Android.R;
 
-public class Dialog_01_Login_Credentials extends Dialog {
+public class Dialog_Auth_01_Login_Credentials extends Dialog {
 
-        public Dialog_01_Login_Credentials(@NonNull Context context) {
+        public Dialog_Auth_01_Login_Credentials(@NonNull Context context) {
             super(context);
 
             setContentView(R.layout.dialog_01_login_credentials);

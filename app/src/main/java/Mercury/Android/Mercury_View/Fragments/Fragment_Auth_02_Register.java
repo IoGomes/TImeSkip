@@ -24,7 +24,7 @@ import com.airbnb.lottie.LottieAnimationView;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_01_User;
 import Mercury.Android.Mercury_View.Activities.Activity_02_Feed;
-import Mercury.Android.Mercury_View.Dialogs.Dialog_01_Login_Credentials;
+import Mercury.Android.Mercury_View.Dialogs.Dialog_Auth_01_Login_Credentials;
 import Mercury.Android.R;
 
 /// @author Ítalo Oliveira Gomes
@@ -107,7 +107,7 @@ public class Fragment_Auth_02_Register extends Fragment {
                 }, 1500);
 
             } else {
-                Dialog_01_Login_Credentials dialog = new Dialog_01_Login_Credentials(requireContext());
+                Dialog_Auth_01_Login_Credentials dialog = new Dialog_Auth_01_Login_Credentials(requireContext());
                 dialog.show();
             }
         });

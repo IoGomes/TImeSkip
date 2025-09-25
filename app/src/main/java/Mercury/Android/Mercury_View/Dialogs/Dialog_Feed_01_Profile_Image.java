@@ -5,20 +5,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import Mercury.Android.Mercury_Model.Services.AlertDialog;
 import Mercury.Android.R;
 
-public class Dialog_03_ProfileImage extends Dialog {
-    public Dialog_03_ProfileImage(@NonNull Context context) {
+public class Dialog_Feed_01_Profile_Image extends Dialog {
+    public Dialog_Feed_01_Profile_Image(@NonNull Context context) {
         super(context);
 
         setContentView(R.layout.dialog_profile_image);
