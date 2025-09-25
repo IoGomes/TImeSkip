@@ -21,14 +21,14 @@ import androidx.fragment.app.Fragment;
 
 import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_01_Login;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_02_Register;
-import Mercury.Android.Mercury_View.UI_Observer;
+import Mercury.Android.Mercury_View.View_Observer;
 import Mercury.Android.R;
 import Mercury.Android.databinding.Activity01AuthBinding;
 
 /// @author Ítalo Oliveira Gomes
 
 @SuppressWarnings("SpellCheckingInspection")
-public class Activity_01_Auth extends AppCompatActivity implements UI_Observer {
+public class Activity_01_Auth extends AppCompatActivity implements View_Observer {
 
     private static final int RC_SIGN_IN = 9001;
 

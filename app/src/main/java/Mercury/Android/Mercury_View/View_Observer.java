@@ -1,5 +1,5 @@
 package Mercury.Android.Mercury_View;
 
-public interface UI_Observer {
+public interface View_Observer {
     public void update();
 }

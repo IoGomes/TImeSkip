@@ -20,13 +20,13 @@ import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_01_Inbox;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_03_Calls;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_02_Contacts;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_04_Archived;
-import Mercury.Android.Mercury_View.UI_Observer;
+import Mercury.Android.Mercury_View.View_Observer;
 import Mercury.Android.R;
 
 /// @author Ítalo Oliveira Gomes
 
 @SuppressWarnings("SpellCheckingInspection")
-public class Activity_02_Feed extends AppCompatActivity implements UI_Observer {
+public class Activity_02_Feed extends AppCompatActivity implements View_Observer {
 
     private int corNormal;
     private Map<Integer, Integer> coresSelecionadas;
