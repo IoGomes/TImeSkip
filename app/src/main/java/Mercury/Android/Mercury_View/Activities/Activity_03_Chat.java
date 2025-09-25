@@ -15,7 +15,6 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_03_Message;
-import Mercury.Android.Mercury_View.RecyclerView.RView_02_MsgAdapter;
+import Mercury.Android.Mercury_View.RecyclerView.RView_Chat_01_Msg_Adp;
 import Mercury.Android.R;
 import eightbitlab.com.blurview.BlurView;
 
@@ -43,7 +42,7 @@ public class Activity_03_Chat extends AppCompatActivity {
 
     private ConstraintLayout bottomBar;
 
-    private RView_02_MsgAdapter adapter;
+    private RView_Chat_01_Msg_Adp adapter;
 
     private boolean isKeyboardVisible;
     private List<Entity_03_Message> messageList;
@@ -63,7 +62,7 @@ public class Activity_03_Chat extends AppCompatActivity {
         button = findViewById(R.id.clipButton);
 
         messageList = new ArrayList<>();
-        adapter = new RView_02_MsgAdapter(messageList);
+        adapter = new RView_Chat_01_Msg_Adp(messageList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

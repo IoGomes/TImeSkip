@@ -26,7 +26,7 @@ import Mercury.Android.Mercury_View.Activities.Activity_03_Chat;
 import Mercury.Android.Mercury_View.Dialogs.Dialog_03_ProfileImage;
 import Mercury.Android.R;
 
-public class RView_01_ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RView_Feed_01_Chat_Adp extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<Entity_02_Chat_Session> chats;
     private List<Entity_02_Chat_Session> filteredChats;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
@@ -37,7 +37,7 @@ public class RView_01_ChatAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private AdapterView.OnItemClickListener clickListener;
 
-    public RView_01_ChatAdapter(List<Entity_02_Chat_Session> chats) {
+    public RView_Feed_01_Chat_Adp(List<Entity_02_Chat_Session> chats) {
         this.chats = chats;
         this.filteredChats = new ArrayList<>(chats);
     }

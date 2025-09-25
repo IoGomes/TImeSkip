@@ -15,12 +15,12 @@ import java.util.Locale;
 import Mercury.Android.Mercury_Model.Entitys.Entity_03_Message;
 import Mercury.Android.R;
 
-public class RView_02_MsgAdapter extends RecyclerView.Adapter<RView_02_MsgAdapter.MessageViewHolder> {
+public class RView_Chat_01_Msg_Adp extends RecyclerView.Adapter<RView_Chat_01_Msg_Adp.MessageViewHolder> {
 
     private final List<Entity_03_Message> messages;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
-    public RView_02_MsgAdapter(List<Entity_03_Message> messages) {
+    public RView_Chat_01_Msg_Adp(List<Entity_03_Message> messages) {
         this.messages = messages;
     }
 

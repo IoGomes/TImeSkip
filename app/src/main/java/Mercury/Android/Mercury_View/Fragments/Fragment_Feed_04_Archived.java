@@ -17,14 +17,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import Mercury.Android.Mercury_View.RecyclerView.RView_01_ChatAdapter;
+import Mercury.Android.Mercury_View.RecyclerView.RView_Feed_01_Chat_Adp;
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
 import Mercury.Android.R;
 
 public class Fragment_Feed_04_Archived extends Fragment {
 
     private RecyclerView recyclerView;
-    private RView_01_ChatAdapter adapter;
+    private RView_Feed_01_Chat_Adp adapter;
     private List<Entity_02_Chat_Session> chatSessions;
 
     @Nullable
@@ -74,7 +74,7 @@ public class Fragment_Feed_04_Archived extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new RView_01_ChatAdapter(chatSessions);
+        adapter = new RView_Feed_01_Chat_Adp(chatSessions);
         recyclerView.setAdapter(adapter);
 
         return view;
