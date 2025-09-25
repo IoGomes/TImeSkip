@@ -30,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_03_Message;
-import Mercury.Android.Mercury_View.RecyclerView.RView_Chat_01_Msg_Adp;
+import Mercury.Android.Mercury_View.RecyclerView.RV_Chat_01_Msg_Adapter;
 import Mercury.Android.R;
 import eightbitlab.com.blurview.BlurView;
 
@@ -42,7 +42,7 @@ public class Activity_03_Chat extends AppCompatActivity {
 
     private ConstraintLayout bottomBar;
 
-    private RView_Chat_01_Msg_Adp adapter;
+    private RV_Chat_01_Msg_Adapter adapter;
 
     private boolean isKeyboardVisible;
     private List<Entity_03_Message> messageList;
@@ -62,7 +62,7 @@ public class Activity_03_Chat extends AppCompatActivity {
         button = findViewById(R.id.clipButton);
 
         messageList = new ArrayList<>();
-        adapter = new RView_Chat_01_Msg_Adp(messageList);
+        adapter = new RV_Chat_01_Msg_Adapter(messageList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

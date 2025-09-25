@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import Mercury.Android.Mercury_View.Activities.Activity_03_Chat;
-import Mercury.Android.Mercury_View.RecyclerView.RView_Feed_01_Chat_Adp;
+import Mercury.Android.Mercury_View.RecyclerView.RV_Feed_01_Chat_Adapter;
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
 import Mercury.Android.R;
 
@@ -28,7 +28,7 @@ public class Fragment_Feed_01_Inbox extends Fragment {
 
     ImageButton button;
     private RecyclerView recyclerView;
-    private RView_Feed_01_Chat_Adp adapter;
+    private RV_Feed_01_Chat_Adapter adapter;
     private List<Entity_02_Chat_Session> chatSessions;
 
     public Fragment_Feed_01_Inbox() {
@@ -163,7 +163,7 @@ public class Fragment_Feed_01_Inbox extends Fragment {
 
         });
 
-        adapter = new RView_Feed_01_Chat_Adp(chatSessions);
+        adapter = new RV_Feed_01_Chat_Adapter(chatSessions);
         recyclerView.setAdapter(adapter);
 
         button = view.findViewById(R.id.start_chat);

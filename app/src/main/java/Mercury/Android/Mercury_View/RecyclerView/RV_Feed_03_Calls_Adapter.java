@@ -1,4 +1,4 @@
 package Mercury.Android.Mercury_View.RecyclerView;
 
-public class RView_Feed_04_Archived_Adp {
+public class RV_Feed_03_Calls_Adapter {
 }
