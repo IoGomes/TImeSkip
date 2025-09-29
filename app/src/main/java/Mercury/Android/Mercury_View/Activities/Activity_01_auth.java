@@ -3,40 +3,39 @@ package Mercury.Android.Mercury_View.Activities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import android.content.Intent;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 
 import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_01_Login;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_02_Register;
-import Mercury.Android.Mercury_View.View.View_Observer;
 import Mercury.Android.R;
 import Mercury.Android.databinding.Activity01AuthBinding;
 
 /// @author Ítalo Oliveira Gomes
 
 @SuppressWarnings("SpellCheckingInspection")
-public class Activity_01_Auth extends AppCompatActivity implements View_Observer {
-
-    private static final int RC_SIGN_IN = 9001;
+public class Activity_01_Auth extends AppCompatActivity {
 
     private boolean isFragment01Visible = true;
-
-    ImageButton returnButton;
-
     private Activity01AuthBinding binding;
+    private static final int REQUEST_CODE_PERMISSIONS = 101;
+    private static final String[] REQUIRED_PERMISSIONS = {
+
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +44,16 @@ public class Activity_01_Auth extends AppCompatActivity implements View_Observer
         binding = Activity01AuthBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        View rootLayout = findViewById(R.id.root);
-        int navigationBarHeight = getNavigationBarHeight();
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
 
+        allPermissionsGranted();
+        ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        View rootLayout = findViewById(R.id.root);
+
+        int navigationBarHeight = getNavigationBarHeight();
         int left = rootLayout.getPaddingLeft();
         int top = rootLayout.getPaddingTop();
         int right = rootLayout.getPaddingRight();
@@ -55,65 +61,30 @@ public class Activity_01_Auth extends AppCompatActivity implements View_Observer
 
         rootLayout.setPadding(left, top, right, bottom + navigationBarHeight);
 
-        returnButton = findViewById(R.id.returnButton);
+        Fragment fragmentAuth01Login = new Fragment_Auth_01_Login();
+        replaceFragment(fragmentAuth01Login);
 
-        Window window = getWindow();
-        window.setStatusBarColor(Color.BLACK);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-
-        returnButton.setOnClickListener(v-> {
-            alternarFragment();
-        });
-
-        Fragment fragmentInicial = new Fragment_Auth_01_Login();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.motionLayout, fragmentInicial)
-                .commit();
-
+        binding.returnButton.setOnClickListener(v -> alternarFragment());
+        binding.text3.setOnClickListener(v -> alternarFragment());
         binding.text3.setText(Html.fromHtml("<u>SignUp!</u>"));
-
-        binding.text3.setOnClickListener(v -> {
-            alternarFragment();
-            returnButton.setVisibility(VISIBLE);
-        });
-
-        // Ajuste de taxa de atualização se API >= R
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Display.Mode[] modes = getDisplay().getSupportedModes();
-            Display.Mode highestMode = modes[0];
-            for (Display.Mode mode : modes) {
-                if (mode.getRefreshRate() > highestMode.getRefreshRate()) {
-                    highestMode = mode;
-                }
-            }
-            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-            layoutParams.preferredDisplayModeId = highestMode.getModeId();
-            getWindow().setAttributes(layoutParams);
-        }
     }
 
     private void alternarFragment() {
         Fragment proximoFragment;
 
         if (isFragment01Visible) {
+            binding.returnButton.setVisibility(VISIBLE);
             proximoFragment = new Fragment_Auth_02_Register();
             binding.text3.setText(Html.fromHtml("<u>SignIn!</u>"));
             isFragment01Visible = false;
         } else {
-            returnButton.setVisibility(GONE);
+            binding.returnButton.setVisibility(GONE);
             proximoFragment = new Fragment_Auth_01_Login();
             binding.text3.setText(Html.fromHtml("<u>SignUp!</u>"));
             isFragment01Visible = true;
         }
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.motionLayout, proximoFragment)
-                .commit();
+        replaceFragment(proximoFragment);
     }
 
     @Override
@@ -128,23 +99,10 @@ public class Activity_01_Auth extends AppCompatActivity implements View_Observer
 
         isFragment01Visible = savedInstanceState.getBoolean("isFragment01Visible", true);
 
-        // Atualiza o TextView com base no fragment visível
         binding.text3.setText(Html.fromHtml(isFragment01Visible ? "<u>SignUp!</u>" : "<u>SignIn!</u>"));
 
         Fragment fragmentParaMostrar = isFragment01Visible ? new Fragment_Auth_01_Login() : new Fragment_Auth_02_Register();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.motionLayout, fragmentParaMostrar)
-                .commit();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            Log.w("GoogleAuth", "Google sign in failed");
-        }
+        replaceFragment(fragmentParaMostrar);
     }
 
     @Override
@@ -154,6 +112,7 @@ public class Activity_01_Auth extends AppCompatActivity implements View_Observer
             getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(null);
         }
     }
+
     private int getNavigationBarHeight() {
         int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
@@ -162,8 +121,27 @@ public class Activity_01_Auth extends AppCompatActivity implements View_Observer
         return 0;
     }
 
-    @Override
-    public void update() {
-
+    private void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.motionLayout, fragment)
+                .commit();
     }
-}
+
+    private boolean allPermissionsGranted() {
+        for (String permission : REQUIRED_PERMISSIONS) {
+            if (ContextCompat.checkSelfPermission(this, permission) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+

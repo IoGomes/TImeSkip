@@ -15,7 +15,7 @@ public class Dialog_Feed_01_Profile_Image extends Dialog {
     public Dialog_Feed_01_Profile_Image(@NonNull Context context) {
         super(context);
 
-        setContentView(R.layout.dialog_profile_image);
+        setContentView(R.layout.dialog_05_profile_image);
 
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 

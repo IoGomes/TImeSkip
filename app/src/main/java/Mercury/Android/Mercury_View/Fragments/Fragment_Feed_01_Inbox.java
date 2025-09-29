@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import Mercury.Android.Mercury_View.Activities.Activity_03_Chat;
+import Mercury.Android.Mercury_View.Dialogs.Dialog_Feed_Choose_Contact;
 import Mercury.Android.Mercury_View.RecyclerView.RV_Feed_01_Chat_Adapter;
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
 import Mercury.Android.R;
@@ -168,8 +169,8 @@ public class Fragment_Feed_01_Inbox extends Fragment {
 
         button = view.findViewById(R.id.start_chat);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), Activity_03_Chat.class);
-            startActivity(intent);
+            Dialog_Feed_Choose_Contact dialogFeedChooseContact = new Dialog_Feed_Choose_Contact(requireContext());
+            dialogFeedChooseContact.show();
         });
 
         return view;

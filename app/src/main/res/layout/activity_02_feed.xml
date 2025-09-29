@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/orbitron_variablefont_wght"
-                android:paddingStart="08dp"
+                android:paddingStart="04dp"
                 android:text="Nebula"
                 android:textColor="@color/white"
                 android:textSize="30sp"
@@ -74,12 +74,17 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/button_inbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:clickable="false"
                     android:id="@+id/inbox"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -90,6 +95,7 @@
                     android:stateListAnimator="@animator/scale_animation" />
 
                 <TextView
+                    android:clickable="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -101,17 +107,19 @@
 
             </LinearLayout>
 
-            <Space
-                android:layout_width="32dp"
-                android:layout_height="0dp" />
 
             <LinearLayout
+                android:id="@+id/button_contact"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:clickable="false"
                     android:id="@+id/contact"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -122,6 +130,7 @@
                     android:stateListAnimator="@animator/scale_animation" />
 
                 <TextView
+                    android:clickable="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -132,17 +141,19 @@
                 </TextView>
             </LinearLayout>
 
-            <Space
-                android:layout_width="32dp"
-                android:layout_height="0dp" />
 
             <LinearLayout
+                android:id="@+id/button_call"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="match_parent"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:clickable="false"
                     android:id="@+id/calls"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -153,6 +164,7 @@
                     android:stateListAnimator="@animator/scale_animation" />
 
                 <TextView
+                    android:clickable="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -165,17 +177,18 @@
 
             </LinearLayout>
 
-            <Space
-                android:layout_width="32dp"
-                android:layout_height="0dp" />
-
             <LinearLayout
+                android:id="@+id/button_archived"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:clickable="false"
                     android:id="@+id/archived"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -186,6 +199,7 @@
                     android:stateListAnimator="@animator/scale_animation" />
 
                 <TextView
+                    android:clickable="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

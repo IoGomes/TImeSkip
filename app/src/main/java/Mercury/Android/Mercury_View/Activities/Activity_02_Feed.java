@@ -1,78 +1,62 @@
 package Mercury.Android.Mercury_View.Activities;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_01_Inbox;
-import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_03_Calls;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_02_Contacts;
+import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_03_Calls;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_04_Archived;
-import Mercury.Android.Mercury_View.View.View_Observer;
 import Mercury.Android.R;
+import Mercury.Android.databinding.Activity02FeedBinding;
 
 /// @author Ítalo Oliveira Gomes
 
 @SuppressWarnings("SpellCheckingInspection")
-public class Activity_02_Feed extends AppCompatActivity implements View_Observer {
-
-    private int corNormal;
-    private Map<Integer, Integer> coresSelecionadas;
+public class Activity_02_Feed extends AppCompatActivity {
 
     //Instancias dos Fragments
-    Fragment fragment03 = new Fragment_Feed_01_Inbox();
-    Fragment fragment04 = new Fragment_Feed_03_Calls();
-    Fragment fragment05 = new Fragment_Feed_02_Contacts();
-    Fragment fragment06 = new Fragment_Feed_04_Archived();
+    Fragment fragment01 = new Fragment_Feed_01_Inbox();
+    Fragment fragment02 = new Fragment_Feed_02_Contacts();
+    Fragment fragment03 = new Fragment_Feed_03_Calls();
+    Fragment fragment04 = new Fragment_Feed_04_Archived();
 
+    private Activity02FeedBinding binding;
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceBundle) {
-        super.onCreate(savedInstanceBundle);
-        setContentView(R.layout.activity_02_main_menu);
 
-        TextView textView2 = findViewById(R.id.text);
+        super.onCreate(savedInstanceBundle);
+
+        binding = Activity02FeedBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         View rootLayout = findViewById(R.id.root);
+
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().setNavigationBarColor(Color.parseColor("#101010"));
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         int navigationBarHeight = getNavigationBarHeight();
         rootLayout.setPadding(0, 0, 0, navigationBarHeight);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, fragment03)
-                .commit();
-
-        Window window = getWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false);
-        } else {
-            window.getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            );
-        }
-
-        window.setStatusBarColor(Color.TRANSPARENT);
-        window.setNavigationBarColor(Color.parseColor("#101010"));
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
+        replaceFragment(fragment01);
 
         changeButtonBg();
     }
+
     private int getNavigationBarHeight() {
         int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
@@ -81,56 +65,60 @@ public class Activity_02_Feed extends AppCompatActivity implements View_Observer
         return 0;
     }
 
-    @Override
-    public void update() {
-
-    }
-
     public void changeButtonBg() {
         int[] botoesIds = {
-                R.id.inbox,
-                R.id.contact,
-                R.id.calls,
-                R.id.archived,
+                R.id.button_inbox,
+                R.id.button_contact,
+                R.id.button_call,
+                R.id.button_archived,
         };
 
-        // Mapeamento: cada botão -> fragment correspondente
+        Map<Integer, Integer> layoutParaBotaoMap = new HashMap<>();
+        layoutParaBotaoMap.put(R.id.button_inbox, R.id.inbox);
+        layoutParaBotaoMap.put(R.id.button_contact, R.id.contact);
+        layoutParaBotaoMap.put(R.id.button_call, R.id.calls);
+        layoutParaBotaoMap.put(R.id.button_archived, R.id.archived);
+
         Map<Integer, Fragment> fragmentMap = new HashMap<>();
-        fragmentMap.put(R.id.inbox, fragment03);
-        fragmentMap.put(R.id.contact, fragment04);
-        fragmentMap.put(R.id.calls, fragment05);
-        fragmentMap.put(R.id.archived, fragment06);
+        fragmentMap.put(R.id.button_inbox, fragment01);
+        fragmentMap.put(R.id.button_contact, fragment02);
+        fragmentMap.put(R.id.button_call, fragment03);
+        fragmentMap.put(R.id.button_archived, fragment04);
 
         for (int id : botoesIds) {
-            ImageButton btn = findViewById(id);
+            LinearLayout btn = findViewById(id);
             btn.setOnClickListener(v -> {
-                selecionarBotao((ImageButton) v);
-                trocarFragment(fragmentMap.get(v.getId())); // troca fragment no LinearLayout
+                int imageButtonId = layoutParaBotaoMap.get(v.getId());
+                ImageButton imageButton = findViewById(imageButtonId);
+                selecionarBotao(imageButton);
+                replaceFragment(fragmentMap.get(v.getId()));
             });
         }
 
-        // Exibe fragment inicial (inbox)
-        ImageButton inboxBtn = findViewById(R.id.inbox);
-        selecionarBotao(inboxBtn);
-        trocarFragment(fragmentMap.get(R.id.inbox));
+        ImageButton imageButtonInbox = findViewById(layoutParaBotaoMap.get(R.id.button_inbox));
+        selecionarBotao(imageButtonInbox);
+        replaceFragment(fragmentMap.get(R.id.button_inbox));
     }
 
-    private ImageButton ultimoClicado = null;
+    private ImageButton ultimoImageButtonClicado = null;
 
-    private void selecionarBotao(ImageButton botaoAtual) {
-        if (ultimoClicado != null && ultimoClicado != botaoAtual) {
-            ultimoClicado.setBackground(null);
+    private void selecionarBotao(ImageButton imageButton) {
+        if (imageButton != null) {
+
+            if (ultimoImageButtonClicado != null && ultimoImageButtonClicado != imageButton) {
+                ultimoImageButtonClicado.setBackground(null);
+            }
+            imageButton.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_selected_highlight));
+            ultimoImageButtonClicado = imageButton;
         }
-
-        botaoAtual.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_selected_highlight));
-        ultimoClicado = botaoAtual;
     }
 
-    private void trocarFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentContainer, fragment) // usa o LinearLayout como container
+                .replace(R.id.fragmentContainer, fragment)
                 .commit();
     }
-
 }
+
+

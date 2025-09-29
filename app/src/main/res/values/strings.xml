@@ -29,4 +29,5 @@
     <string name="pesquisar2">Pesquisar...</string>
     <string name="sticker_icon">Sticker Icon</string>
     <string name="texto_multicolor_html"><![CDATA[<font color="#FF0000">Texto vermelho</font> e <font color="#0000FF">texto azul</font>]]></string>
+    <string name="recentes">Recentes</string>
 </resources>

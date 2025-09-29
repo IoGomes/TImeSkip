@@ -1,18 +1,16 @@
 package Mercury.Android.Mercury_View.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -28,33 +26,35 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_03_Message;
 import Mercury.Android.Mercury_View.RecyclerView.RV_Chat_01_Msg_Adapter;
 import Mercury.Android.R;
-import eightbitlab.com.blurview.BlurView;
+import Mercury.Android.databinding.Activity03ChatBinding;
 
-@SuppressWarnings("SpellCheckingInspection")
+/// @author Ítalo Oliveira Gomes
+
 public class Activity_03_Chat extends AppCompatActivity {
 
-    private BlurView blurView;
-
-
     private ConstraintLayout bottomBar;
-
     private RV_Chat_01_Msg_Adapter adapter;
-
-    private boolean isKeyboardVisible;
     private List<Entity_03_Message> messageList;
-
     private ImageButton button;
-
+    Activity03ChatBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceBundle) {
 
         super.onCreate(savedInstanceBundle);
-        setContentView(R.layout.activity_03_chat);
+
+        binding = Activity03ChatBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().setNavigationBarColor(Color.parseColor("#101010"));
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         RecyclerView recyclerView = findViewById(R.id.rv_message);
         EditText editMessage = findViewById(R.id.messageTextfield);
@@ -67,21 +67,30 @@ public class Activity_03_Chat extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        View rootLayout = findViewById(R.id.chat);
-        int navigationBarHeight = getNavigationBarHeight();
+        getNavigationBarHeight();
 
         bottomBar = findViewById(R.id.bottom_bar);
         setupKeyboardListener();
 
+        binding.videoCall.setOnClickListener(v -> {
+            Intent intent = new Intent(this, Activity_05_Video_Call.class);
+            startActivity(intent);
+        });
+
         editMessage.addTextChangedListener(new TextWatcher() {
             @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Não precisamos usar
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Se houver texto, esconde o ícone; se estiver vazio, mostra
+
                 if (s.length() > 0) {
                     button.setVisibility(View.GONE);
                 } else {
@@ -89,49 +98,27 @@ public class Activity_03_Chat extends AppCompatActivity {
                 }
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
         });
 
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = editMessage.getText().toString().trim();
-                if (!text.isEmpty()) {
-                    // Cria nova mensagem
-                    Entity_03_Message newMessage = new Entity_03_Message();
-                    newMessage.setMessage(text);
-                    newMessage.setDateTimeMessage(new Date());
-                    newMessage.setWasVisualized(false);
+        buttonSend.setOnClickListener(v -> {
 
-                    // Adiciona na lista
-                    messageList.add(newMessage);
-                    adapter.notifyItemInserted(messageList.size() - 1);
+            String text = editMessage.getText().toString().trim();
 
-                    // Rola para a última mensagem
-                    recyclerView.scrollToPosition(messageList.size() - 1);
+            if (!text.isEmpty()) {
 
-                    // Limpa campo de texto
-                    editMessage.setText("");
-                }
+                Entity_03_Message newMessage = new Entity_03_Message();
+                newMessage.setMessage(text);
+                newMessage.setDateTimeMessage(new Date());
+                newMessage.setWasVisualized(false);
+
+                messageList.add(newMessage);
+                adapter.notifyItemInserted(messageList.size() - 1);
+
+                recyclerView.scrollToPosition(messageList.size() - 1);
+
+                editMessage.setText("");
             }
         });
-
-        Window window = getWindow();
-        window.setNavigationBarColor(Color.parseColor("#99202020"));
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-
-        blurView = findViewById(R.id.blurview);
-
-
-        ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
-        Drawable windowBackground = decorView.getBackground();
-
-        blurView.setupWith(decorView).setFrameClearDrawable(windowBackground).setBlurRadius(12f);
 
         ImageButton popupMenu = findViewById(R.id.menu);
 
@@ -174,6 +161,7 @@ public class Activity_03_Chat extends AppCompatActivity {
                 Field mPopup = camera1.getClass().getDeclaredField("mPopup");
                 mPopup.setAccessible(true);
                 Object menuPopupHelper = mPopup.get(camera1);
+                assert menuPopupHelper != null;
                 Method setBackgroundDrawable = menuPopupHelper.getClass()
                         .getDeclaredMethod("setBackgroundDrawable", Drawable.class);
                 setBackgroundDrawable.invoke(menuPopupHelper,
@@ -234,38 +222,6 @@ public class Activity_03_Chat extends AppCompatActivity {
     private int dpToPx(int dp) {
         float density = getResources().getDisplayMetrics().density;
         return Math.round(dp * density);
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        Log.e("onPause", "TESTE");
-
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.e("onResume", "TESTE");
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        Log.e("LyfeCycle","");
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        Log.e("LyfeCycle","");
-    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        Log.e("LyfeCycle","");
-
     }
 
 }

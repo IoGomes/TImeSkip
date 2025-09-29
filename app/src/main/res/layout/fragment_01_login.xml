@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_auth_container"
     android:padding="12dp">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:fontFamily="@font/space_mono_regular"
-        android:gravity="center"
-        android:text="One Galaxy, Multiple Conections"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
@@ -30,9 +18,18 @@
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/email_textfield"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.362"
-        tools:layout_editor_absoluteX="8dp" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:fontFamily="@font/space_mono_regular"
+        android:gravity="center"
+        android:text="One Galaxy, Multiple Conections"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/email_textfield"
@@ -58,7 +55,7 @@
         android:layout_height="48dp"
         android:layout_marginVertical="16dp"
         android:background="@drawable/bg_edit_textfield"
-        android:drawableRight="@drawable/ic_password"
+        android:drawableEnd="@drawable/ic_password"
         android:fontFamily="@font/space_mono_regular"
         android:hint="@string/senha"
         android:inputType="textPassword"
@@ -69,7 +66,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/confirm" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,7 +80,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/space_mono_regular" />
+            android:fontFamily="@font/space_mono_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,11 +92,10 @@
             android:fontFamily="@font/space_mono_regular"
             android:text="Remain Conected"
             android:textColor="@color/white"
-            android:textSize="12sp" />
-
-        <Space
-            android:layout_width="18dp"
-            android:layout_height="wrap_content" />
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxExample"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
@@ -106,8 +105,11 @@
             android:fontFamily="@font/space_mono_regular"
             android:text="@string/esqueceu_a_senha"
             android:textColor="@color/white"
-            android:textSize="12sp" />
-    </LinearLayout>
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/login_button"
@@ -180,12 +182,10 @@
         <ImageButton
             android:id="@+id/other_button"
             android:layout_width="40dp"
-            android:layout_gravity="center"
             android:layout_height="40dp"
-            android:background="@drawable/ic_github_auth"
-            />
+            android:layout_gravity="center"
+            android:background="@drawable/ic_github_auth" />
 
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

@@ -103,6 +103,11 @@ public class Entity_01_User {
     }
 
     public void setTermsAndConditionsAceppted(boolean termsAndConditionsAceppted) {
+        if(!termsAndConditionsAceppted){
+            setUserEnabled(false);
+            AlertDialog.addMesage("É necessario aceitar os termos e condições");
+            return;
+        }
         isTermsAndConditionsAceppted = termsAndConditionsAceppted;
     }
 
@@ -111,6 +116,11 @@ public class Entity_01_User {
     }
 
     public void setPrivacyPoliticAccepted(boolean privacyPoliticAccepted) {
+        if(!privacyPoliticAccepted){
+            setUserEnabled(false);
+            AlertDialog.addMesage("É necessario aceitar os termos e condições");
+            return;
+        }
         isPrivacyPoliticAccepted = privacyPoliticAccepted;
     }
 

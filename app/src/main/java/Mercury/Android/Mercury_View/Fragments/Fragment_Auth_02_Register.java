@@ -22,7 +22,9 @@ import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import Mercury.Android.Mercury_Model.Entitys.Entity_01_User;
+import Mercury.Android.Mercury_Model.Services.Network_Checker;
+import Mercury.Android.Mercury_Model.Services.Service_Permission;
+import Mercury.Android.Mercury_Model.UseCases.UseCase_02_Register;
 import Mercury.Android.Mercury_View.Activities.Activity_02_Feed;
 import Mercury.Android.Mercury_View.Dialogs.Dialog_Auth_01_Login_Credentials;
 import Mercury.Android.R;
@@ -38,27 +40,35 @@ public class Fragment_Auth_02_Register extends Fragment {
     TextView privacyPolicy;
     LottieAnimationView loadAnimation;
 
+    EditText userNameTextfield;
+    EditText userEmailTextfield;
+    EditText userTelefoneNumberTextfield;
+    EditText userPasswordTextfield;
+    EditText confirmUserPasswordTextfield;
+
+    SwitchCompat termosCondicoes;
+    SwitchCompat termosPrivacidade;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_02_register, container, false);
-        ViewGroup rootView = (ViewGroup) requireActivity().getWindow().getDecorView().findViewById(android.R.id.content);
 
         //Buttons
         signupButton = view.findViewById(R.id.signup_button);
 
         //EditTextField
-        EditText userNameTextfield = view.findViewById(R.id.user_name_textfield);
-        EditText userEmailTextfield = view.findViewById(R.id.user_email_textfield);
-        EditText userTelefoneNumberTextfield = view.findViewById(R.id.user_telefone_textfield);
-        EditText userPasswordTextfield = view.findViewById(R.id.user_password_textfield);
-        EditText confirmUserPasswordTextfield = view.findViewById(R.id.confirm_user_password_textfield);
+        userNameTextfield = view.findViewById(R.id.user_name_textfield);
+        userEmailTextfield = view.findViewById(R.id.user_email_textfield);
+        userTelefoneNumberTextfield = view.findViewById(R.id.user_telefone_textfield);
+        userPasswordTextfield = view.findViewById(R.id.user_password_textfield);
+        confirmUserPasswordTextfield = view.findViewById(R.id.confirm_user_password_textfield);
 
         //Switchs
-        SwitchCompat termosCondicoes = view.findViewById(R.id.termos_e_condicoes);
-        SwitchCompat termosPrivacidade = view.findViewById(R.id.termos_e_privacidade);
+        termosCondicoes = view.findViewById(R.id.termos_e_condicoes);
+        termosPrivacidade = view.findViewById(R.id.termos_e_privacidade);
 
         //TextViews
         termsAndConditions = view.findViewById(R.id.terms_and_conditions);
@@ -76,28 +86,31 @@ public class Fragment_Auth_02_Register extends Fragment {
 
         signupButton.setOnClickListener(v -> {
 
+            signupButton.setClickable(false);
+
             String userName = userNameTextfield.getText().toString();
             String userEmail = userEmailTextfield.getText().toString();
             String userTelefoneNumber = userTelefoneNumberTextfield.getText().toString();
             String userPassword = userPasswordTextfield.getText().toString();
             String confirmUserPassword = confirmUserPasswordTextfield.getText().toString();
-            Boolean isTermosCondicoes = termosCondicoes.isActivated();
-            Boolean isTermosPrivacidade = termosPrivacidade.isActivated();
+            Boolean isTermosCondicoes = termosCondicoes.isChecked();
+            Boolean isTermosPrivacidade = termosPrivacidade.isChecked();
 
-            Entity_01_User newRegistry = new Entity_01_User(
+            UseCase_02_Register register = new UseCase_02_Register(
                     userName,
                     userEmail,
                     userTelefoneNumber,
                     userPassword,
                     confirmUserPassword,
                     isTermosCondicoes,
-                    isTermosPrivacidade
+                    isTermosPrivacidade,
+                    new Network_Checker(requireContext()),
+                    new Service_Permission(requireContext())
             );
 
-            if (newRegistry.isUserEnabled()) {
+            if (register.isEnabled()) {
 
                 signupButton.setText("");
-
                 loadAnimation.playAnimation();
                 loadAnimation.setVisibility(VISIBLE);
 
@@ -109,6 +122,7 @@ public class Fragment_Auth_02_Register extends Fragment {
             } else {
                 Dialog_Auth_01_Login_Credentials dialog = new Dialog_Auth_01_Login_Credentials(requireContext());
                 dialog.show();
+                signupButton.setClickable(true);
             }
         });
 
@@ -121,6 +135,15 @@ public class Fragment_Auth_02_Register extends Fragment {
         signupButton.setText("SignUp");
         loadAnimation.cancelAnimation();
         loadAnimation.setVisibility(GONE);
+        signupButton.setClickable(true);
+        userNameTextfield.setText("");
+        userEmailTextfield.setText("");
+        userTelefoneNumberTextfield.setText("");
+        userPasswordTextfield.setText("");
+        confirmUserPasswordTextfield.setText("");
+        termosCondicoes.setChecked(false);
+        termosPrivacidade.setChecked(false);
+
     }
 
     @Override

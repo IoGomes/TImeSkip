@@ -1,6 +1,7 @@
 package Mercury.Android.Mercury_View.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,14 +85,21 @@ public class RV_Feed_01_Chat_Adapter extends RecyclerView.Adapter<RecyclerView.V
                 bindChatData(messageHolder, chatSession);
             }
 
-            // Configurar click listener para o profileImage
             messageHolder.profileImage.setOnClickListener(v -> {
                 Dialog_Feed_01_Profile_Image dialog = new Dialog_Feed_01_Profile_Image(v.getContext());
                 dialog.show();
             });
         }
 
-        // Configurar click listener apenas para itens de chat (itemView completo)
+        if (holder instanceof MessageViewHolder) {
+
+                holder.itemView.setOnLongClickListener(v -> {
+                    Dialog_Feed_01_Profile_Image dialog = new Dialog_Feed_01_Profile_Image(v.getContext());
+                    dialog.show();
+                    return true;
+                });
+        }
+
         if (holder instanceof MessageViewHolder) {
             holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), Activity_03_Chat.class);

@@ -34,7 +34,6 @@ public class Fragment_Feed_04_Archived extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_06_archived, container, false);
 
-
         chatSessions = new ArrayList<>();
 
         List<String> users2 = Arrays.asList("userC", "userD");

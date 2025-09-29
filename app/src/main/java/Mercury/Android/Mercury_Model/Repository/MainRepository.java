@@ -1,4 +1,4 @@
-package Mercury.Android.Mercury_Repository;
+package Mercury.Android.Mercury_Model.Repository;
 
 import Mercury.Android.Mercury_Model.Retrofit.RetrofitService;
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;

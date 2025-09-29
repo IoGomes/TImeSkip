@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/searchGlass"
     android:layout_width="match_parent"
-    android:layout_height="58dp"
-    android:background="#000000">
-
-    <EditText
-        android:id="@+id/searchGlass"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="04dp"
-        android:background="@drawable/main_searchfield"
-        android:hint="@string/pesquisar2"
-        android:drawablePadding="20dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:drawableStart="@drawable/ic_search"
-        android:textColorHint="#909090" />
-
-</LinearLayout>
+    android:layout_height="44dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="04dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="04dp"
+    android:background="@drawable/main_searchfield"
+    android:drawableStart="@drawable/ic_search"
+    android:drawablePadding="20dp"
+    android:hint="@string/pesquisar2"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:textColorHint="#909090" />

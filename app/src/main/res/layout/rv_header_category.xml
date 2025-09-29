@@ -3,86 +3,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:orientation="vertical"
+    android:clipToPadding="false"
     android:overScrollMode="never"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
     android:scrollbars="none"
     tools:ignore="Typos">
 
     <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
         <Button
             android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:padding="05dp"
+            android:layout_marginEnd="06dp"
             android:background="@drawable/bg_category"
-            android:text="Todas as Categorias"
+            android:text="Todas"
             android:textAllCaps="false"
             android:textColor="#808080"
             android:textSize="12sp" />
 
-
-        <Space
-            android:layout_width="6dp"
-            android:layout_height="0dp" />
-
         <Button
-            android:text="Não lidas"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_gravity="center"
+            android:layout_marginEnd="06dp"
             android:background="@drawable/bg_category"
+            android:text="Não lidas"
             android:textAllCaps="false"
             android:textColor="#808080"
             android:textSize="12sp" />
 
-        <Space
-            android:layout_width="6dp"
-            android:layout_height="0dp" />
-
         <Button
-
-            android:text="Favoritas"
             android:id="@+id/button6"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_gravity="center"
+            android:layout_marginEnd="06dp"
             android:background="@drawable/bg_category"
+            android:text="Favoritas"
             android:textAllCaps="false"
             android:textColor="#808080"
             android:textSize="12sp" />
 
-        <Space
-            android:layout_width="6dp"
-            android:layout_height="0dp" />
-
         <Button
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="06dp"
+            android:background="@drawable/bg_category"
             android:text="Grupos"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_category"
             android:textAllCaps="false"
             android:textColor="#808080"
             android:textSize="12sp" />
 
-        <Space
-            android:layout_width="6dp"
-            android:layout_height="12dp" />
-
         <Button
-            android:text="+"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:background="@drawable/bg_category"
+            android:text="+"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="#808080"
             android:textSize="12sp" />
 
     </LinearLayout>

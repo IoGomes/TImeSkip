@@ -49,7 +49,6 @@ dependencies {
     implementation(libs.blurview)
 
     //Lottie - Biblioteca Debug para detectação de Memory Leaks;
-    debugImplementation(libs.leakcanary.android)
 
     //Lottie - Biblioteca para Animações;
     implementation(libs.lottie)
@@ -59,4 +58,11 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.gson)
 
+    val camerax_version = "1.3.1"
+
+    implementation(libs.camera.core)
+    implementation(libs.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.extensions)
 }
