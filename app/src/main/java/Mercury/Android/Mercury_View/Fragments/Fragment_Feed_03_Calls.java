@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,9 +37,6 @@ public class Fragment_Feed_03_Calls extends Fragment {
         Date dataFicticia = cal.getTime();
 
         callSessions = new ArrayList<>();
-
-        List<String> users2 = Arrays.asList("userC", "userD");
-        List<Date> dates2 = Arrays.asList(new Date());
 
         callSessions.add(new Entity_05_call(
                 "Nome de Contato",
