@@ -2,6 +2,7 @@ package Mercury.Android.Mercury_View.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
+import Mercury.Android.Mercury_View.Utils.NavBar_Inserts;
 import Mercury.Android.R;
 
 public class Activity_05_Video_Call extends AppCompatActivity {
@@ -25,11 +27,16 @@ public class Activity_05_Video_Call extends AppCompatActivity {
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
+
+            setTheme(androidx.appcompat.R.style.Theme_AppCompat);
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_04_video_call);
 
             Window window = getWindow();
             window.setStatusBarColor(Color.TRANSPARENT);
+
+            View rootLayout = findViewById(R.id.extern_image);
+            NavBar_Inserts.adjustPaddingForNavigationBar(rootLayout, this);
 
             Objects.requireNonNull(getSupportActionBar()).hide();
 

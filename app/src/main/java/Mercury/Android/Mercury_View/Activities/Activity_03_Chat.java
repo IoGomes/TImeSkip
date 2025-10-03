@@ -18,6 +18,7 @@ import android.widget.PopupMenu;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +30,9 @@ import java.util.List;
 import java.util.Objects;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_03_Message;
+import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_01_Login;
 import Mercury.Android.Mercury_View.RecyclerView.RV_Chat_01_Msg_Adapter;
+import Mercury.Android.Mercury_View.Utils.NavBar_Inserts;
 import Mercury.Android.R;
 import Mercury.Android.databinding.Activity03ChatBinding;
 
@@ -46,13 +49,17 @@ public class Activity_03_Chat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceBundle) {
 
+        setTheme(androidx.appcompat.R.style.Theme_AppCompat);
+
         super.onCreate(savedInstanceBundle);
 
         binding = Activity03ChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        View rootLayout = findViewById(R.id.root);
+        NavBar_Inserts.adjustPaddingForNavigationBar(rootLayout, this);
+
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().setNavigationBarColor(Color.parseColor("#101010"));
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
@@ -66,8 +73,6 @@ public class Activity_03_Chat extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
-        getNavigationBarHeight();
 
         bottomBar = findViewById(R.id.bottom_bar);
         setupKeyboardListener();
@@ -209,14 +214,6 @@ public class Activity_03_Chat extends AppCompatActivity {
                 bottomBar.setLayoutParams(layoutParams);
             }
         });
-    }
-
-    private int getNavigationBarHeight() {
-        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            return getResources().getDimensionPixelSize(resourceId);
-        }
-        return 0;
     }
 
     private int dpToPx(int dp) {

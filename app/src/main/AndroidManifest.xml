@@ -9,50 +9,48 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Nebula"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
-        android:theme="@style/Theme.AppCompat">
+        android:theme="@style/Theme.App.Starting">
+
+        <meta-data
+            android:name="android.graphics.high_refresh_rate_enabled"
+            android:value="true" />
 
         <activity
-            android:name="Mercury.Android.Mercury_View.Activities.Activity_01_Auth"
+            android:name=".Mercury_View.Activities.Activity_00_OnBoard"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat">
+            android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="Mercury.Android.Mercury_View.Activities.Activity_02_Feed"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat">
-        </activity>
+        <activity android:name=".Mercury_View.Activities.Activity_01_Auth" />
+
+        <activity android:name=".Mercury_View.Activities.Activity_02_Feed" />
 
         <activity
-            android:name="Mercury.Android.Mercury_View.Activities.Activity_03_Chat"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-        </activity>
+            android:name=".Mercury_View.Activities.Activity_03_Chat"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
-            android:name="Mercury.Android.Mercury_View.Activities.Activity_05_Video_Call"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-        </activity>
+            android:name=".Mercury_View.Activities.Activity_05_Video_Call"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
     </application>
 </manifest>

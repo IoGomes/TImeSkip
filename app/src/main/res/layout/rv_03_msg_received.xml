@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:layout_margin="04dp">
 
-    <eightbitlab.com.blurview.BlurView
+    <LinearLayout
         android:id="@+id/message_glass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,6 +34,6 @@
             tools:ignore="SmallSp"
             />
 
-    </eightbitlab.com.blurview.BlurView>
+    </LinearLayout>
 
 </FrameLayout>

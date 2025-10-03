@@ -37,16 +37,13 @@ android {
 }
 
 dependencies {
-    implementation(libs.blurview)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.recyclerview)
-
-    //Lottie - Biblioteca Debug para detectação de Memory Leaks;
-    implementation(libs.blurview)
 
     //Lottie - Biblioteca Debug para detectação de Memory Leaks;
 
@@ -58,7 +55,10 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.gson)
 
+    implementation(libs.androidx.core.splashscreen)
+
     val camerax_version = "1.3.1"
+    implementation(libs.androidx.appcompat.v161)
 
     implementation(libs.camera.core)
     implementation(libs.camera.camera2)

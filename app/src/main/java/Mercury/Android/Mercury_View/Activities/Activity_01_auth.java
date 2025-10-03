@@ -20,6 +20,7 @@ import java.util.Objects;
 
 import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_01_Login;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Auth_02_Register;
+import Mercury.Android.Mercury_View.Utils.NavBar_Inserts;
 import Mercury.Android.R;
 import Mercury.Android.databinding.Activity01AuthBinding;
 
@@ -28,45 +29,31 @@ import Mercury.Android.databinding.Activity01AuthBinding;
 @SuppressWarnings("SpellCheckingInspection")
 public class Activity_01_Auth extends AppCompatActivity {
 
+    private final Fragment fragmentAuth01Login = new Fragment_Auth_01_Login();
     private boolean isFragment01Visible = true;
     private Activity01AuthBinding binding;
-    private static final int REQUEST_CODE_PERMISSIONS = 101;
-    private static final String[] REQUIRED_PERMISSIONS = {
-
-            Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO,
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setTheme(androidx.appcompat.R.style.Theme_AppCompat);
 
         binding = Activity01AuthBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
-        allPermissionsGranted();
-        ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
-
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         View rootLayout = findViewById(R.id.root);
+        NavBar_Inserts.adjustPaddingForNavigationBar(rootLayout, this);
 
-        int navigationBarHeight = getNavigationBarHeight();
-        int left = rootLayout.getPaddingLeft();
-        int top = rootLayout.getPaddingTop();
-        int right = rootLayout.getPaddingRight();
-        int bottom = rootLayout.getPaddingBottom();
-
-        rootLayout.setPadding(left, top, right, bottom + navigationBarHeight);
-
-        Fragment fragmentAuth01Login = new Fragment_Auth_01_Login();
         replaceFragment(fragmentAuth01Login);
 
         binding.returnButton.setOnClickListener(v -> alternarFragment());
         binding.text3.setOnClickListener(v -> alternarFragment());
-        binding.text3.setText(Html.fromHtml("<u>SignUp!</u>"));
+        binding.text3.setText(Html.fromHtml("<u><font color='#ffffff'>SignUp</font></u>"));
     }
 
     private void alternarFragment() {
@@ -75,12 +62,12 @@ public class Activity_01_Auth extends AppCompatActivity {
         if (isFragment01Visible) {
             binding.returnButton.setVisibility(VISIBLE);
             proximoFragment = new Fragment_Auth_02_Register();
-            binding.text3.setText(Html.fromHtml("<u>SignIn!</u>"));
+            binding.text3.setText(Html.fromHtml("<u><font color='#ffffff'>Sign In</font></u>"));
             isFragment01Visible = false;
         } else {
             binding.returnButton.setVisibility(GONE);
             proximoFragment = new Fragment_Auth_01_Login();
-            binding.text3.setText(Html.fromHtml("<u>SignUp!</u>"));
+            binding.text3.setText(Html.fromHtml("<u><font color='#ffffff'>Sign Up</font></u>"));
             isFragment01Visible = true;
         }
 
@@ -113,29 +100,11 @@ public class Activity_01_Auth extends AppCompatActivity {
         }
     }
 
-    private int getNavigationBarHeight() {
-        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            return getResources().getDimensionPixelSize(resourceId);
-        }
-        return 0;
-    }
-
     private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.motionLayout, fragment)
                 .commit();
-    }
-
-    private boolean allPermissionsGranted() {
-        for (String permission : REQUIRED_PERMISSIONS) {
-            if (ContextCompat.checkSelfPermission(this, permission) !=
-                    PackageManager.PERMISSION_GRANTED) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override

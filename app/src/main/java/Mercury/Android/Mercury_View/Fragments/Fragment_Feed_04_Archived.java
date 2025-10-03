@@ -1,7 +1,6 @@
 package Mercury.Android.Mercury_View.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import Mercury.Android.Mercury_View.RecyclerView.RV_Feed_01_Chat_Adapter;
 import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
-import Mercury.Android.R;
+import Mercury.Android.Mercury_View.RecyclerView.RV_Feed_01_Chat_Adapter;
+import Mercury.Android.databinding.Fragment06ArchivedBinding;
 
 public class Fragment_Feed_04_Archived extends Fragment {
 
-    private RecyclerView recyclerView;
-    private RV_Feed_01_Chat_Adapter adapter;
+    Fragment06ArchivedBinding bind;
     private List<Entity_02_Chat_Session> chatSessions;
 
     @Nullable
@@ -32,50 +29,42 @@ public class Fragment_Feed_04_Archived extends Fragment {
     @SuppressWarnings("SpellCheckingInspection")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_06_archived, container, false);
+        bind = Fragment06ArchivedBinding.inflate(inflater, container, false);
 
         chatSessions = new ArrayList<>();
 
-        List<String> users2 = Arrays.asList("userC", "userD");
-        List<Date> dates2 = Arrays.asList(new Date());
-
-        // (opcional) adicionar dados de teste
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
-                users2,
-                dates2,
+                Arrays.asList("userC", "userD"),
+                List.of(new Date()),
                 "Reunião marcada para amanhã."
         ));
 
-
-
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
-                users2,
-                dates2,
-                "Reunião marcada para amanhã."
-        ));
-        chatSessions.add(new Entity_02_Chat_Session(
-                "chat2",
-                users2,
-                dates2,
-                "Reunião marcada para amanhã."
-        ));
-        chatSessions.add(new Entity_02_Chat_Session(
-                "chat2",
-                users2,
-                dates2,
+                Arrays.asList("userC", "userD"),
+                List.of(new Date()),
                 "Reunião marcada para amanhã."
         ));
 
-        Log.d("FragmentDebug", "Itens na lista: " + chatSessions.size());
+        chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                Arrays.asList("userC", "userD"),
+                List.of(new Date()),
+                "Reunião marcada para amanhã."
+        ));
 
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        chatSessions.add(new Entity_02_Chat_Session(
+                "chat2",
+                Arrays.asList("userC", "userD"),
+                List.of(new Date()),
+                "Reunião marcada para amanhã."
+        ));
 
-        adapter = new RV_Feed_01_Chat_Adapter(chatSessions);
-        recyclerView.setAdapter(adapter);
+        bind.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        return view;
+        bind.recyclerView.setAdapter(new RV_Feed_01_Chat_Adapter(chatSessions));
+
+        return bind.getRoot();
     }
 }

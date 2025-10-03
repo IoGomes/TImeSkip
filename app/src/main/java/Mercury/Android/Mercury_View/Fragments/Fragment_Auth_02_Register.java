@@ -11,150 +11,101 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
-
-import com.airbnb.lottie.LottieAnimationView;
 
 import Mercury.Android.Mercury_Model.Services.Network_Checker;
 import Mercury.Android.Mercury_Model.Services.Service_Permission;
 import Mercury.Android.Mercury_Model.UseCases.UseCase_02_Register;
 import Mercury.Android.Mercury_View.Activities.Activity_02_Feed;
 import Mercury.Android.Mercury_View.Dialogs.Dialog_Auth_01_Login_Credentials;
+import Mercury.Android.Mercury_View.Utils.ToastWarning;
 import Mercury.Android.R;
+import Mercury.Android.databinding.Fragment02RegisterBinding;
 
 /// @author Ítalo Oliveira Gomes
 
-@SuppressWarnings("SpellCheckingInspection")
 public class Fragment_Auth_02_Register extends Fragment {
 
-    // Variáveis globais para LifeCycle
-    Button signupButton;
-    TextView termsAndConditions;
-    TextView privacyPolicy;
-    LottieAnimationView loadAnimation;
-
-    EditText userNameTextfield;
-    EditText userEmailTextfield;
-    EditText userTelefoneNumberTextfield;
-    EditText userPasswordTextfield;
-    EditText confirmUserPasswordTextfield;
-
-    SwitchCompat termosCondicoes;
-    SwitchCompat termosPrivacidade;
+    Fragment02RegisterBinding bind;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_02_register, container, false);
+        bind = Fragment02RegisterBinding.inflate(inflater, container, false);
 
-        //Buttons
-        signupButton = view.findViewById(R.id.signup_button);
-
-        //EditTextField
-        userNameTextfield = view.findViewById(R.id.user_name_textfield);
-        userEmailTextfield = view.findViewById(R.id.user_email_textfield);
-        userTelefoneNumberTextfield = view.findViewById(R.id.user_telefone_textfield);
-        userPasswordTextfield = view.findViewById(R.id.user_password_textfield);
-        confirmUserPasswordTextfield = view.findViewById(R.id.confirm_user_password_textfield);
-
-        //Switchs
-        termosCondicoes = view.findViewById(R.id.termos_e_condicoes);
-        termosPrivacidade = view.findViewById(R.id.termos_e_privacidade);
-
-        //TextViews
-        termsAndConditions = view.findViewById(R.id.terms_and_conditions);
-        privacyPolicy = view.findViewById(R.id.privacy_policy);
-
-        //LottieAnimations
-        loadAnimation = view.findViewById(R.id.lottie_loading);
-
-        //Sublinhando Textviews
         String htmlTermsAndConditions = "I agree with the <u><font color='#E68AD8'>Terms and Conditions</font></u>";
         String htmlPrivacyPolicy = "I agree with the <u><font color='#E68AD8'>Privacy Policy</font></u>";
 
-        termsAndConditions.setText(Html.fromHtml(htmlTermsAndConditions, Html.FROM_HTML_MODE_LEGACY));
-        privacyPolicy.setText(Html.fromHtml(htmlPrivacyPolicy, Html.FROM_HTML_MODE_LEGACY));
+        bind.termsAndConditions.setText(Html.fromHtml(htmlTermsAndConditions, Html.FROM_HTML_MODE_LEGACY));
+        bind.privacyPolicy.setText(Html.fromHtml(htmlPrivacyPolicy, Html.FROM_HTML_MODE_LEGACY));
 
-        signupButton.setOnClickListener(v -> {
+        bind.signupButton.setOnClickListener(v -> {
 
-            signupButton.setClickable(false);
-
-            String userName = userNameTextfield.getText().toString();
-            String userEmail = userEmailTextfield.getText().toString();
-            String userTelefoneNumber = userTelefoneNumberTextfield.getText().toString();
-            String userPassword = userPasswordTextfield.getText().toString();
-            String confirmUserPassword = confirmUserPasswordTextfield.getText().toString();
-            Boolean isTermosCondicoes = termosCondicoes.isChecked();
-            Boolean isTermosPrivacidade = termosPrivacidade.isChecked();
+            v.setClickable(false);
 
             UseCase_02_Register register = new UseCase_02_Register(
-                    userName,
-                    userEmail,
-                    userTelefoneNumber,
-                    userPassword,
-                    confirmUserPassword,
-                    isTermosCondicoes,
-                    isTermosPrivacidade,
+                    bind.userNameTextfield.getText().toString(),
+                    bind.userEmailTextfield.getText().toString(),
+                    bind.userTelefoneTextfield.getText().toString(),
+                    bind.userPasswordTextfield.getText().toString(),
+                    bind.confirmUserPasswordTextfield.getText().toString(),
+                    bind.termosECondicoes.isChecked(),
+                    bind.termosEPrivacidade.isChecked(),
                     new Network_Checker(requireContext()),
                     new Service_Permission(requireContext())
             );
 
             if (register.isEnabled()) {
 
-                signupButton.setText("");
-                loadAnimation.playAnimation();
-                loadAnimation.setVisibility(VISIBLE);
+                bind.signupButton.setText("");
+                bind.loadAnimation.playAnimation();
+                bind.loadAnimation.setVisibility(VISIBLE);
 
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    Intent intent = new Intent(getActivity(), Activity_02_Feed.class);
-                    startActivity(intent);
-                }, 1500);
+                    startActivity(new Intent(getActivity(), Activity_02_Feed.class));
+                    v.setClickable(true);}, 1500);
 
             } else {
-                Dialog_Auth_01_Login_Credentials dialog = new Dialog_Auth_01_Login_Credentials(requireContext());
-                dialog.show();
-                signupButton.setClickable(true);
+                new Dialog_Auth_01_Login_Credentials(requireContext()).show();
+                bind.signupButton.setClickable(true);
             }
         });
 
-        return view;
+        bind.googleLogin.setOnClickListener(v ->
+                new ToastWarning(requireContext()).showInfo("Google Sign-in is still under development."));
+
+        bind.gitAuth.setOnClickListener(view ->
+                new ToastWarning(requireContext()).showInfo("Github Sign-in is still under development."));
+
+        return bind.getRoot();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        signupButton.setText("SignUp");
-        loadAnimation.cancelAnimation();
-        loadAnimation.setVisibility(GONE);
-        signupButton.setClickable(true);
-        userNameTextfield.setText("");
-        userEmailTextfield.setText("");
-        userTelefoneNumberTextfield.setText("");
-        userPasswordTextfield.setText("");
-        confirmUserPasswordTextfield.setText("");
-        termosCondicoes.setChecked(false);
-        termosPrivacidade.setChecked(false);
 
-    }
+        bind.signupButton.setText(R.string.signup_fragment);
+        bind.loadAnimation.cancelAnimation();
+        bind.loadAnimation.setVisibility(GONE);
+        bind.signupButton.setClickable(true);
+        bind.userNameTextfield.setText("");
+        bind.userEmailTextfield.setText("");
+        bind.userTelefoneTextfield.setText("");
+        bind.userPasswordTextfield.setText("");
+        bind.confirmUserPasswordTextfield.setText("");
+        bind.termosECondicoes.setChecked(false);
+        bind.termosEPrivacidade.setChecked(false);
 
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        signupButton = null;
+        bind = null;
     }
 }

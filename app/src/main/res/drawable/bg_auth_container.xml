@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:shape="rectangle"
     tools:ignore="ExtraText">
-    <corners android:radius="22dp">
+    <corners android:radius="26dp">
     </corners>
-    <solid android:color="#99101010">
+    <solid android:color="#99000000">
     </solid>
     <stroke
         android:width="0.1dp"
-        android:color="#303030" />
+        android:color="#202020" />
 </shape>

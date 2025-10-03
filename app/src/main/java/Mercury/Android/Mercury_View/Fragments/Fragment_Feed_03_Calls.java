@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,28 +18,23 @@ import java.util.List;
 
 import Mercury.Android.Mercury_Model.Entitys.Entity_05_call;
 import Mercury.Android.Mercury_View.RecyclerView.RV_Feed_03_Calls_Adapter;
-import Mercury.Android.R;
+import Mercury.Android.databinding.Fragment05CallHistoryBinding;
 
 @SuppressWarnings("SpellCheckingInspection")
 
 public class Fragment_Feed_03_Calls extends Fragment {
 
-    ImageButton button;
-    private RecyclerView recyclerView;
-    private RV_Feed_03_Calls_Adapter adapter;
+    Fragment05CallHistoryBinding bind;
     private List<Entity_05_call> callSessions;
-
-    public Fragment_Feed_03_Calls() {
-        super();
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_05_call_history, container, false);
+
+        bind = Fragment05CallHistoryBinding.inflate(inflater, container, false);
 
         Calendar cal = Calendar.getInstance();
-        cal.set(2025, Calendar.SEPTEMBER, 25, 10, 30, 0); // ano, mês, dia, hora, minuto, segundo
+        cal.set(2025, Calendar.SEPTEMBER, 25, 10, 30, 0);
         Date dataFicticia = cal.getTime();
 
         callSessions = new ArrayList<>();
@@ -72,13 +65,10 @@ public class Fragment_Feed_03_Calls extends Fragment {
                 true
         ));
 
+        bind.callRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        recyclerView = view.findViewById(R.id.callRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        bind.callRecyclerView.setAdapter(new RV_Feed_03_Calls_Adapter(callSessions));
 
-        adapter = new RV_Feed_03_Calls_Adapter(callSessions);
-        recyclerView.setAdapter(adapter);
-
-        return view;
+        return bind.getRoot();
     }
 }

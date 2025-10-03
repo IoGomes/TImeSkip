@@ -11,135 +11,79 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.airbnb.lottie.LottieAnimationView;
 
 import Mercury.Android.Mercury_Model.UseCases.UseCase_01_Login;
 import Mercury.Android.Mercury_View.Activities.Activity_02_Feed;
 import Mercury.Android.Mercury_View.Dialogs.Dialog_Auth_01_Login_Credentials;
-import Mercury.Android.R;
+import Mercury.Android.Mercury_View.Utils.ToastWarning;
+import Mercury.Android.databinding.Fragment01LoginBinding;
 
 /// @author Ítalo Oliveira Gomes
 
-@SuppressWarnings("SpellCheckingInspection")
 public class Fragment_Auth_01_Login extends Fragment {
 
-    private TextView remainConected;
-    private TextView forgotPassword;
-    private ImageButton buttonGoogleLogin;
-    private LottieAnimationView loadingAnimation;
-    private Button loginButton;
-    private EditText userEmailTextfield;
-    private EditText userPasswordTextfield;
+    private Fragment01LoginBinding bind;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_01_login, container, false);
-        ViewGroup rootView = (ViewGroup) requireActivity().getWindow().getDecorView().findViewById(android.R.id.content);
-
-        //TextViews
-        remainConected = view.findViewById(R.id.textView);
-        forgotPassword = view.findViewById(R.id.textView2);
+        bind = Fragment01LoginBinding.inflate(inflater, container, false);
 
         String forgot = "<u><font color='#E68AD8'>Forgot Password?</u>";
         String htmlText = "<u><font color='#ffffff'>Nebula</font></u>";
 
-        remainConected.setText(Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY));
-        forgotPassword.setText(Html.fromHtml(forgot, Html.FROM_HTML_MODE_LEGACY));
+        bind.textView.setText(Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY));
+        bind.textView2.setText(Html.fromHtml(forgot, Html.FROM_HTML_MODE_LEGACY));
 
-        //LottieAnimations
-        loadingAnimation = view.findViewById(R.id.lottie_loading_circle);
+        bind.login.setOnClickListener(v -> {
 
-        //Buttons
-        buttonGoogleLogin = view.findViewById(R.id.googleLogin);
-        loginButton = view.findViewById(R.id.loginButton);
+            v.setClickable(false);
+            bind.googleLogin.setClickable(false);
 
-        //EditTextField
-        userEmailTextfield = view.findViewById(R.id.email_textfield);
-        userPasswordTextfield = view.findViewById(R.id.user_password_textfield);
+            new UseCase_01_Login(
+                    bind.emailTextfield.getText().toString(),
+                    bind.userPasswordTextfield.getText().toString()
+            );
 
-        loginButton.setOnClickListener(v -> {
-
-            loginButton.setClickable(false);
-            buttonGoogleLogin.setClickable(false);
-
-            String userEmail = userEmailTextfield.getText().toString();
-            String userPassword = userPasswordTextfield.getText().toString();
-
-            UseCase_01_Login login = new UseCase_01_Login(userEmail, userPassword);
-
-            if (login.isLoginEnabled()) {
-
-                loginButton.setText(null);
-                loadingAnimation.setVisibility(VISIBLE);
-                loadingAnimation.playAnimation();
-
-                new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    Intent intent = new Intent(getActivity(), Activity_02_Feed.class);
-                    startActivity(intent);
-                }, 1500);
-            }
-
-            Dialog_Auth_01_Login_Credentials dialog = new Dialog_Auth_01_Login_Credentials(requireContext());
-            dialog.show();
-            loginButton.setClickable(true);
-
-        });
-
-        buttonGoogleLogin.setOnClickListener(v -> {
-
-            buttonGoogleLogin.setClickable(false);
-
-            loginButton.setText(null);
-
-            loadingAnimation.setVisibility(VISIBLE);
-            loadingAnimation.playAnimation();
+            bind.login.setText(null);
+            bind.loadAnimation.setVisibility(VISIBLE);
+            bind.loadAnimation.playAnimation();
 
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                Intent intent = new Intent(getActivity(), Activity_02_Feed.class);
-                startActivity(intent);
-            }, 1500);
+                startActivity(new Intent(getActivity(), Activity_02_Feed.class));
+                v.setClickable(true);}, 1500);
+
+            new Dialog_Auth_01_Login_Credentials(requireContext()).show();
         });
-        return view;
+
+        bind.googleLogin.setOnClickListener(v ->
+                new ToastWarning(requireContext()).showInfo("Google Sign-in is still under development."));
+
+        bind.gitAuth.setOnClickListener(view ->
+                new ToastWarning(requireContext()).showInfo("Github Sign-in is still under development."));
+
+        return bind.getRoot();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
-        if (buttonGoogleLogin != null) {
-            buttonGoogleLogin.setOnClickListener(null);
-        }
-
-        if (loadingAnimation != null) {
-            loadingAnimation.cancelAnimation();
-            loadingAnimation.setVisibility(View.GONE);
-        }
-
-        loadingAnimation = null;
-        loginButton = null;
-        buttonGoogleLogin = null;
-        remainConected = null;
-        forgotPassword = null;
+        bind = null;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        buttonGoogleLogin.setClickable(true);
-        loginButton.setClickable(true);
-        loginButton.setText("Login");
-        loadingAnimation.cancelAnimation();
-        loadingAnimation.setVisibility(INVISIBLE);
+        bind.googleLogin.setClickable(true);
+        bind.loginButton.setClickable(true);
+        bind.login.setText("Login");
+        bind.loadAnimation.cancelAnimation();
+        bind.loadAnimation.setVisibility(INVISIBLE);
     }
 
     @Override

@@ -2,178 +2,164 @@ package Mercury.Android.Mercury_View.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
 import Mercury.Android.Mercury_View.Activities.Activity_03_Chat;
 import Mercury.Android.Mercury_View.Dialogs.Dialog_Feed_Choose_Contact;
 import Mercury.Android.Mercury_View.RecyclerView.RV_Feed_01_Chat_Adapter;
-import Mercury.Android.Mercury_Model.Entitys.Entity_02_Chat_Session;
-import Mercury.Android.R;
+import Mercury.Android.databinding.Fragment01FeedInboxBinding;
+
 
 public class Fragment_Feed_01_Inbox extends Fragment {
 
-    ImageButton button;
-    private RecyclerView recyclerView;
-    private RV_Feed_01_Chat_Adapter adapter;
+    Fragment01FeedInboxBinding bind;
     private List<Entity_02_Chat_Session> chatSessions;
-
-    public Fragment_Feed_01_Inbox() {
-        super();
-    }
 
     @Nullable
     @Override
     @SuppressWarnings("SpellCheckingInspection")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_03_chats, container, false);
+        bind = Fragment01FeedInboxBinding.inflate(inflater, container, false);
 
         chatSessions = new ArrayList<>();
 
         List<String> users2 = Arrays.asList("userC", "userD");
-        List<Date> dates2 = Arrays.asList(new Date());
+        List<Date> date = Arrays.asList(new Date());
 
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
         chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
-        ));chatSessions.add(new Entity_02_Chat_Session(
+        ));
+        chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
-        ));chatSessions.add(new Entity_02_Chat_Session(
+        ));
+        chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
-        ));chatSessions.add(new Entity_02_Chat_Session(
+        ));
+        chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
-        ));chatSessions.add(new Entity_02_Chat_Session(
+        ));
+        chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
-        ));chatSessions.add(new Entity_02_Chat_Session(
+        ));
+        chatSessions.add(new Entity_02_Chat_Session(
                 "chat2",
                 users2,
-                dates2,
+                date,
                 "Reunião marcada para amanhã."
         ));
 
-        Log.d("FragmentDebug", "Itens na lista: " + chatSessions.size());
+        bind.recyclerView.setAdapter(new RV_Feed_01_Chat_Adapter(chatSessions));
 
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        bind.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        recyclerView.setOnClickListener(v -> {
-            Log.d("RecyclerClick", "RecyclerView container clicado");
-            Intent intent = new Intent(getActivity(), Activity_03_Chat.class);
-            startActivity(intent);
+        bind.recyclerView.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), Activity_03_Chat.class)));
 
-        });
+        bind.startChat.setOnClickListener(v ->
+                new Dialog_Feed_Choose_Contact(requireContext()).show());
 
-        adapter = new RV_Feed_01_Chat_Adapter(chatSessions);
-        recyclerView.setAdapter(adapter);
-
-        button = view.findViewById(R.id.start_chat);
-        button.setOnClickListener(v -> {
-            Dialog_Feed_Choose_Contact dialogFeedChooseContact = new Dialog_Feed_Choose_Contact(requireContext());
-            dialogFeedChooseContact.show();
-        });
-
-        return view;
+        return bind.getRoot();
 
     }
 }

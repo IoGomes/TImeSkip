@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_auth_container"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:stateListAnimator="@animator/scale_animation2">
 
     <EditText
         android:id="@+id/user_name_textfield"
@@ -33,7 +34,7 @@
         android:background="@drawable/bg_edit_textfield"
         android:drawableEnd="@drawable/ic_email"
         android:fontFamily="@font/space_mono_regular"
-        android:hint="Email:"
+        android:hint="Email"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textColor="@color/white"
@@ -51,7 +52,7 @@
         android:background="@drawable/bg_edit_textfield"
         android:drawableRight="@drawable/ic_phone_edit_textfield"
         android:fontFamily="@font/space_mono_regular"
-        android:hint="Telefone Number:"
+        android:hint="Telefone Number"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textColor="@color/white"
@@ -91,7 +92,7 @@
         android:background="@drawable/bg_edit_textfield"
         android:drawableRight="@drawable/ic_password"
         android:fontFamily="@font/space_mono_regular"
-        android:hint="Confirm Password:"
+        android:hint="Confirm Password"
         android:inputType="textPassword"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -125,8 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textSize="12sp"
-            android:fontFamily="@font/space_mono_regular"
+            android:textSize="14sp"
             android:text="I agree with the Terms and Conditions"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -157,8 +157,7 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:fontFamily="@font/space_mono_regular"
+            android:textSize="14sp"
             android:text="I agree with the terms of Privacy"
             android:textColor="@color/white" />
 
@@ -186,7 +185,7 @@
             android:visibility="visible" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_loading"
+            android:id="@+id/load_animation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="false"
@@ -197,24 +196,42 @@
             app:lottie_rawRes="@raw/lottie_02_loading" />
     </androidx.cardview.widget.CardView>
 
+    <View
+        android:layout_width="100dp"
+        android:layout_height="0.5dp"
+        android:background="#404040"
+        app:layout_constraintBottom_toTopOf="@+id/google"
+        app:layout_constraintEnd_toStartOf="@+id/signup_button"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
     <TextView
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:id="@id/signup_button"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_gravity="center"
-        android:layout_marginVertical="08dp"
-        android:fontFamily="@font/space_mono_regular"
+        android:layout_marginVertical="10dp"
         android:gravity="center_horizontal"
-        android:text="or signup with"
+        android:text="Or Signup with"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <View
+        android:layout_width="100dp"
+        android:layout_height="0.5dp"
+        android:background="#404040"
+        app:layout_constraintBottom_toTopOf="@+id/google"
+        app:layout_constraintStart_toEndOf="@+id/signup_button"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
     <LinearLayout
         android:id="@+id/google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="04dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -229,7 +246,7 @@
             android:contentDescription="@string/google_login_button" />
 
         <ImageButton
-            android:id="@+id/other_button"
+            android:id="@+id/git_auth"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"

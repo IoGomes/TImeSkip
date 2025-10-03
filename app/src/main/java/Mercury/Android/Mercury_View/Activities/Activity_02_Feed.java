@@ -18,6 +18,7 @@ import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_01_Inbox;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_02_Contacts;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_03_Calls;
 import Mercury.Android.Mercury_View.Fragments.Fragment_Feed_04_Archived;
+import Mercury.Android.Mercury_View.Utils.NavBar_Inserts;
 import Mercury.Android.R;
 import Mercury.Android.databinding.Activity02FeedBinding;
 
@@ -37,32 +38,23 @@ public class Activity_02_Feed extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceBundle) {
 
+        setTheme(androidx.appcompat.R.style.Theme_AppCompat);
+
         super.onCreate(savedInstanceBundle);
 
         binding = Activity02FeedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        View rootLayout = findViewById(R.id.root);
-
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().setNavigationBarColor(Color.parseColor("#101010"));
+
+        View rootLayout = findViewById(R.id.root);
+        NavBar_Inserts.adjustPaddingForNavigationBar(rootLayout, this);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
-
-        int navigationBarHeight = getNavigationBarHeight();
-        rootLayout.setPadding(0, 0, 0, navigationBarHeight);
 
         replaceFragment(fragment01);
 
         changeButtonBg();
-    }
-
-    private int getNavigationBarHeight() {
-        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            return getResources().getDimensionPixelSize(resourceId);
-        }
-        return 0;
     }
 
     public void changeButtonBg() {

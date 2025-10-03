@@ -74,7 +74,6 @@
     <TextView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="02dp"
         android:background="@drawable/ic_notification"
         android:gravity="center"
         android:text="1"
@@ -83,8 +82,7 @@
         android:textSize="08sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textDate"
-        app:layout_constraintVertical_bias="0.846"
+        app:layout_constraintTop_toBottomOf="@+id/textDate"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

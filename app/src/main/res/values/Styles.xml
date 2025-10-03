@@ -5,6 +5,7 @@
         <item name="popupMenuBackground">@drawable/bg_popup_menu</item>
         <item name="android:dropDownVerticalOffset">20dp</item>
         <item name="android:dropDownHorizontalOffset">0dp</item>
+        <item name="android:windowBackground">#000000</item>
     </style>
 
 </resources>
